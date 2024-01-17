@@ -38,13 +38,20 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer overlay v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer
+      overlay
+      v-model="leftDrawerOpen"
+      show-if-above
+      elevated
+      ref="leftDrawer"
+    >
       <q-list>
         <q-item-label header> Menu </q-item-label>
         <q-item
           v-for="route in internalRoutes"
           :key="route.title"
           clickable
+          :active="`/${route.link}` === $route.path"
           :to="`/${route.link}`"
         >
           <q-item-section v-if="route.icon" avatar>
@@ -64,7 +71,7 @@
       overlay
       v-model="cartDrawerOpen"
       show-if-above
-      bordered
+      elevated
     >
       <q-list>
         <q-item-label header> Shopping cart</q-item-label>
@@ -176,7 +183,6 @@ export default defineComponent({
       ] as CartItem[],
     };
   },
-
   methods: {
     toggleLeftDrawer() {
       this.leftDrawerOpen = !this.leftDrawerOpen;
