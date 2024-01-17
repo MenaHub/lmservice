@@ -19,7 +19,7 @@ const envVariables = dotenv.config({
 console.log('Environment Variables:', envVariables);
 dotenv.config();
 
-module.exports = configure(function (/* ctx */) {
+module.exports = configure(function (ctx) {
   return {
     eslint: {
       // fix: true,
@@ -103,7 +103,7 @@ module.exports = configure(function (/* ctx */) {
     devServer: {
       // https: true
       open: true, // opens browser window automatically
-      port: 9090,
+      port: ctx.mode.spa ? 8000 : ctx.mode.pwa ? 9001 : 9090,
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
