@@ -13,3 +13,11 @@ export interface CartItem {
   price: number;
   quantity: number;
 }
+
+export interface ShopItem {
+  name: string;
+  category: string;
+  description: string;
+  price: string;
+  image: string;
+}
