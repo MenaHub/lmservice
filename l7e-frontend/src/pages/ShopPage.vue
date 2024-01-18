@@ -1,8 +1,12 @@
 <template>
   <q-page class="q-pa-md">
     <div class="row q-mb-md">
-      <div class="col-4 q-pa-sm" v-for="(item, index) in items" :key="index">
-        <q-card>
+      <div
+        class="col-12 col-sm-4 col-md-4 q-pa-sm"
+        v-for="(item, index) in items"
+        :key="index"
+      >
+        <q-card class="rounded-borders">
           <q-card-section>
             <q-img :src="item.image" />
           </q-card-section>
@@ -91,3 +95,9 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="scss" scoped>
+.rounded-borders {
+  border-radius: 25px;
+  box-shadow: 8px 2px 8px rgba(0, 0, 0, 0.1);
+}
+</style>
