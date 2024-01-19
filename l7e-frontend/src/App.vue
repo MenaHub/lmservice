@@ -1,11 +1,13 @@
 <template>
-  <router-view />
+  <div class="row justify-center">
+    <router-view />
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'App'
+  name: 'App',
 });
 </script>

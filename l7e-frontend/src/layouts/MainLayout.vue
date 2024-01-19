@@ -1,5 +1,9 @@
 <template>
-  <q-layout view="hHh LpR fff">
+  <q-layout
+    view="hHh LpR fff"
+    container
+    style="max-width: 1280px; min-height: 100vh"
+  >
     <q-header elevated>
       <q-toolbar>
         <q-btn
