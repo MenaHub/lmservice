@@ -17,7 +17,7 @@
 
         <q-toolbar-title class="col-auto"> L.M. Service </q-toolbar-title>
         <q-input
-          class="col-grow q-mx-sm"
+          class="col q-mx-sm"
           dense
           clearable
           borderless
