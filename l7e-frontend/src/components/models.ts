@@ -1,23 +1,15 @@
-export interface Todo {
-  id: number;
-  content: string;
-}
-
-export interface Meta {
-  totalCount: number;
-}
-
 export interface CartItem {
-  id: number;
+  id: string;
   name: string;
   price: number;
   quantity: number;
 }
 
 export interface ShopItem {
+  id: string;
   name: string;
   category: string;
   description: string;
-  price: string;
+  price: number;
   image: string;
 }

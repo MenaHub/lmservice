@@ -88,10 +88,10 @@
             <q-input v-model="item.quantity" readonly borderless>
               <template v-slot:prepend>
                 <q-icon
+                  v-if="item.quantity > 1"
                   class="cursor-pointer"
                   name="remove"
                   @click="item.quantity--"
-                  v-if="item.quantity > 0"
                 />
               </template>
               <template v-slot:append>
@@ -105,7 +105,14 @@
           </q-item-section>
 
           <q-item-section side>
-            <q-btn flat dense round icon="delete" aria-label="Delete" />
+            <q-btn
+              flat
+              dense
+              round
+              icon="delete"
+              aria-label="Delete"
+              @click="removeItemFromCart(item)"
+            />
           </q-item-section>
         </q-item>
       </q-list>
@@ -127,7 +134,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { CartItem } from 'components/models';
+import { CartItem } from 'src/components/models';
+import { useCartStore } from 'src/stores/cart-store';
+const cartStore = useCartStore();
 
 export default defineComponent({
   name: 'MainLayout',
@@ -164,27 +173,7 @@ export default defineComponent({
         },
       ],
       search: '',
-      //TODO: get the shopping cart from the store
-      shoppingCart: [
-        {
-          id: 1,
-          name: 'item1111111111111111111111111111',
-          price: 10,
-          quantity: 1,
-        },
-        {
-          id: 2,
-          name: 'item2',
-          price: 35,
-          quantity: 2,
-        },
-        {
-          id: 3,
-          name: 'item3',
-          price: 40,
-          quantity: 3,
-        },
-      ] as CartItem[],
+      shoppingCart: cartStore.cartItems,
     };
   },
   methods: {
@@ -193,6 +182,9 @@ export default defineComponent({
     },
     toogleCartDrawer() {
       this.cartDrawerOpen = !this.cartDrawerOpen;
+    },
+    removeItemFromCart(item: CartItem) {
+      cartStore.removeItemFromCart(item);
     },
   },
 });
