@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { CartItem } from 'src/components/models';
 
 export const useCartStore = defineStore('cart', {
+  persist: true,
   state: () => ({
     cartItems: [] as CartItem[],
   }),
