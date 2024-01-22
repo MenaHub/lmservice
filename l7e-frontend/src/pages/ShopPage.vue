@@ -1,23 +1,35 @@
 <template>
   <q-page class="q-pa-md">
-    <div class="row q-mb-md items-center">
+    <div class="row q-mb-md flex-center">
       <div
-        class="col-12 col-sm-4 col-md-4 q-pa-sm flex flex-center"
+        class="col-12 col-sm-6 col-md-4 q-pa-sm flex flex-center"
         v-for="(item, index) in items"
         :key="index"
       >
-        <q-card class="my-card">
+        <q-card class="my-card rounded-borders">
           <q-card-section horizontal>
             <q-img class="col-5" src="src/assets/shop/example-img.jpg" />
 
             <q-card-section>
-              <q-item-label>{{ item.category }}</q-item-label>
+              <div class="row items-center q-mb-md" style="gap: 5px">
+                <div class="col-12 q-pa-xs text-center rounded-section">
+                  <div class="row items-center">
+                    <div class="col-3">
+                      <q-icon name="circle" color="orange" size="xs" />
+                    </div>
+                    <div class="col">
+                      {{ item.category }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 q-pa-xs text-center rounded-section">
+                  {{ item.material }}
+                </div>
+              </div>
               <q-item-label>{{ item.description }}</q-item-label>
-              <q-item-label>{{ '$ ' + item.price }}</q-item-label>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
+              <q-item-label class="flex justify-end">
+                {{ '€ ' + item.price }}
+              </q-item-label>
             </q-card-section>
           </q-card-section>
 
@@ -56,7 +68,11 @@ export default defineComponent({
         id: `${i}`,
         name: `Item ${i}`,
         category: `Category ${i}`,
-        description: `Description ${i}`,
+        material: `Material ${i}`,
+        description: `${i} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.`,
         price: i * 10,
         image: 'src/assets/shop/example-img.jpg',
       });
@@ -80,6 +96,11 @@ export default defineComponent({
 .rounded-borders {
   border-radius: 10px;
   box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.24);
+}
+
+.rounded-section {
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.24);
 }
 .my-card {
   width: 100%;

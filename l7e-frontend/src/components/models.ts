@@ -9,6 +9,7 @@ export interface ShopItem {
   id: string;
   name: string;
   category: string;
+  material: string;
   description: string;
   price: number;
   image: string;

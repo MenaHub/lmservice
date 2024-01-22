@@ -82,7 +82,7 @@
         <q-item v-for="item in shoppingCart" :key="item.id">
           <q-item-section>
             <q-item-label class="ellipsis">{{ item.name }}</q-item-label>
-            <q-item-label> $ {{ item.price }}</q-item-label>
+            <q-item-label> {{ '€ ' + item.price }}</q-item-label>
           </q-item-section>
           <q-item-section>
             <q-input v-model="item.quantity" readonly borderless>
