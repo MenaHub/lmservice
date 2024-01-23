@@ -7,7 +7,9 @@ export const useCartStore = defineStore('cart', {
     cartItems: [] as CartItem[],
   }),
   getters: {
-    //doubleCount: (state) => state.counter * 2,
+    getCartTotal: (state) => {
+      return state.cartItems.reduce((acc, i) => acc + i.price * i.quantity, 0);
+    },
   },
   actions: {
     addItemToCart(item: CartItem) {
