@@ -77,45 +77,65 @@
       show-if-above
       elevated
     >
-      <q-list>
-        <q-item-label header> Shopping cart</q-item-label>
-        <q-item v-for="item in shoppingCart" :key="item.id">
-          <q-item-section>
-            <q-item-label class="ellipsis">{{ item.name }}</q-item-label>
-            <q-item-label> {{ '€ ' + item.price }}</q-item-label>
+      <div v-if="shoppingCart.length > 0">
+        <q-list>
+          <q-item-label header> Shopping cart</q-item-label>
+          <q-item v-for="item in shoppingCart" :key="item.id">
+            <q-item-section class="col-6 q-ml-sm">
+              <q-item-label class="ellipsis">{{ item.name }}</q-item-label>
+              <q-item-label> {{ '€ ' + item.price }}</q-item-label>
+            </q-item-section>
+            <q-item-section class="flex flex-center">
+              <q-icon
+                v-if="item.quantity > 1"
+                class="cursor-pointer"
+                name="remove"
+                @click="item.quantity--"
+              />
+            </q-item-section>
+            <q-item-section class="flex flex-center">
+              {{ item.quantity }}
+            </q-item-section>
+            <q-item-section class="flex flex-center">
+              <q-icon
+                class="cursor-pointer"
+                name="add"
+                @click="item.quantity++"
+              />
+            </q-item-section>
+            <q-item-section class="flex flex-center">
+              <q-btn
+                flat
+                dense
+                round
+                color="red-12"
+                icon="delete"
+                aria-label="Delete"
+                @click="removeItemFromCart(item)"
+              />
+            </q-item-section>
+          </q-item>
+        </q-list>
+        <q-separator size="2px" />
+        <q-item>
+          <q-item-section class="col-6 q-ml-sm">
+            <q-item-label class="text-h6">Total</q-item-label>
           </q-item-section>
-          <q-item-section>
-            <q-input v-model="item.quantity" readonly borderless>
-              <template v-slot:prepend>
-                <q-icon
-                  v-if="item.quantity > 1"
-                  class="cursor-pointer"
-                  name="remove"
-                  @click="item.quantity--"
-                />
-              </template>
-              <template v-slot:append>
-                <q-icon
-                  class="cursor-pointer"
-                  name="add"
-                  @click="item.quantity++"
-                />
-              </template>
-            </q-input>
-          </q-item-section>
-
-          <q-item-section side>
-            <q-btn
-              flat
-              dense
-              round
-              icon="delete"
-              aria-label="Delete"
-              @click="removeItemFromCart(item)"
-            />
+          <q-item-section class="flex flex-center">
+            <q-item-label class="text-h6">
+              {{ '€ ' + getCartTotal }}
+            </q-item-label>
           </q-item-section>
         </q-item>
-      </q-list>
+      </div>
+      <div v-else class="column full-height flex-center">
+        <div class="row text-center q-pa-sm">
+          <q-icon name="remove_shopping_cart" size="8rem" color="grey-5" />
+        </div>
+        <div class="row text-center">
+          <p class="text-h6 text-bold">No item in the cart</p>
+        </div>
+      </div>
     </q-drawer>
 
     <q-page-container>
@@ -167,6 +187,11 @@ export default defineComponent({
           link: 'shop',
         },
         {
+          title: 'Favorites',
+          icon: 'favorite',
+          link: 'favorites',
+        },
+        {
           title: 'Contacts',
           icon: 'contacts',
           link: 'contacts',
@@ -185,6 +210,14 @@ export default defineComponent({
     },
     removeItemFromCart(item: CartItem) {
       cartStore.removeItemFromCart(item);
+    },
+  },
+  computed: {
+    getCartTotal(): number {
+      return this.shoppingCart.reduce(
+        (acc, item) => acc + item.price * item.quantity,
+        0
+      );
     },
   },
 });
