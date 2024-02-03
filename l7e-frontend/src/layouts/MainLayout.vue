@@ -12,7 +12,7 @@
           round
           icon="menu"
           aria-label="Menu"
-          @click="toggleLeftDrawer"
+          @click="toggleMenuDrawer"
         />
 
         <q-toolbar-title class="col-auto"> L.M. Service </q-toolbar-title>
@@ -44,10 +44,10 @@
 
     <q-drawer
       overlay
-      v-model="leftDrawerOpen"
+      v-model="menuDrawerOpen"
       show-if-above
       elevated
-      ref="leftDrawer"
+      ref="menuDrawer"
     >
       <q-list>
         <q-item-label header> Menu </q-item-label>
@@ -76,6 +76,7 @@
       v-model="cartDrawerOpen"
       show-if-above
       elevated
+      ref="cartDrawer"
     >
       <div v-if="shoppingCart.length > 0">
         <q-list>
@@ -138,8 +139,8 @@
       </div>
     </q-drawer>
 
-    <q-page-container>
-      <router-view />
+    <q-page-container class="row justify-center">
+      <router-view style="max-width: 90%" />
     </q-page-container>
 
     <q-footer elevated>
@@ -163,7 +164,7 @@ export default defineComponent({
   components: {},
   data() {
     return {
-      leftDrawerOpen: false,
+      menuDrawerOpen: false,
       cartDrawerOpen: false,
       internalRoutes: [
         {
@@ -202,8 +203,8 @@ export default defineComponent({
     };
   },
   methods: {
-    toggleLeftDrawer() {
-      this.leftDrawerOpen = !this.leftDrawerOpen;
+    toggleMenuDrawer() {
+      this.menuDrawerOpen = !this.menuDrawerOpen;
     },
     toogleCartDrawer() {
       this.cartDrawerOpen = !this.cartDrawerOpen;

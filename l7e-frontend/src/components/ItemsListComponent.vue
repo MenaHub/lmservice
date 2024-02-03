@@ -1,5 +1,5 @@
 <template>
-  <div class="row q-mb-md items-center justify-start">
+  <div class="row items-center justify-start">
     <div
       class="col-12 col-sm-6 col-md-4 q-pa-sm flex flex-center"
       v-for="(item, index) in items"
