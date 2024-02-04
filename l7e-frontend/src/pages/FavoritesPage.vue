@@ -1,5 +1,9 @@
 <template>
-  <q-page class="q-pa-md">
+  <q-page>
+    <p class="text-h4">Favorites</p>
+    <p class="text-italic text-grey-7" style="font-size: 1rem">
+      Your liked items, all in one place.
+    </p>
     <items-list-component v-if="items.length > 0" :items="items" />
     <div v-else>
       <div class="row flex-center">

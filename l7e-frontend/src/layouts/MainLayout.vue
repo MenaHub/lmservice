@@ -140,7 +140,7 @@
     </q-drawer>
 
     <q-page-container class="row justify-center">
-      <router-view style="max-width: 90%" />
+      <router-view class="q-pa-xl" style="width: 90%" />
     </q-page-container>
 
     <q-footer elevated>

@@ -1,5 +1,10 @@
 <template>
-  <q-page class="q-pa-md">
+  <q-page>
+    <p class="text-h4">Shop</p>
+    <p class="text-italic text-grey-7" style="font-size: 1rem">
+      Discover a world where every piece of furniture is a work of art,
+      meticulously crafted to elevate your living spaces.
+    </p>
     <items-list-component v-if="items.length > 0" :items="items" />
     <div v-else>
       <div class="row flex-center">
