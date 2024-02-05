@@ -14,3 +14,11 @@ export interface ShopItem {
   price: number;
   image: string;
 }
+
+export interface ClientRequest {
+  fullName: string;
+  email: string;
+  enquirySubject: string;
+  enquiryBody: string;
+  accept: boolean;
+}

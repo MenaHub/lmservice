@@ -139,6 +139,7 @@
 </template>
 
 <script lang="ts">
+import { ClientRequest } from 'src/components/models';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -152,7 +153,7 @@ export default defineComponent({
         enquirySubject: '',
         enquiryBody: '',
         accept: false,
-      },
+      } as ClientRequest,
       stars: 4,
       validForm: false,
       emailRegex: /^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -182,16 +183,17 @@ export default defineComponent({
         (this.contactsForm.accept as boolean);
     },
     onSubmit() {
-      console.log('Form submitted');
-      if (this.contactsForm.accept) {
-        this.contactsForm.accept = false;
-        console.log('Form accepted');
-        this.$q.notify({
-          color: 'positive',
-          message: 'Request sent successfully!',
-          icon: 'check',
-        });
-      }
+      this.sendClientRequest(this.contactsForm);
+      this.$q.notify({
+        color: 'positive',
+        message: 'Request sent successfully!',
+        icon: 'check',
+      });
+      this.contactsForm.accept = false;
+    },
+    sendClientRequest(form: ClientRequest) {
+      //console.log('Sending request to the server', form);
+      // TODO: send the form to the server through an API
     },
     onReset() {
       this.contactsForm = {
