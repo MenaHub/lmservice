@@ -130,8 +130,43 @@
               : 'flex flex-center'
           "
         >
-          <q-btn flat round icon="event" />
-          <q-btn flat color="primary"> Book a consultation </q-btn>
+          <q-btn
+            flat
+            icon="event"
+            label="Book a consultation"
+            text-color="primary"
+          >
+            <q-popup-proxy
+              :anchor="$q.screen.gt.sm ? 'bottom left' : 'top right'"
+              self="top right"
+              transition-show="jump-down"
+              transition-hide="jump-up"
+              transition-duration="800"
+            >
+              <!-- get already booked day from gcal api and hide them -->
+              <q-date
+                v-model="consultationDate"
+                :landscape="$q.screen.gt.sm"
+                mask="DD-MM-YYYY"
+                :events="['2024/02/17', '2024/02/09', '2024/02/26']"
+                event-color="primary"
+              >
+                <div class="row justify-end">
+                  <q-btn
+                    dense
+                    flat
+                    color="primary"
+                    label="Book"
+                    @click="
+                      $router.push(
+                        `/book-a-consultation?date=${consultationDate}`
+                      )
+                    "
+                  />
+                </div>
+              </q-date>
+            </q-popup-proxy>
+          </q-btn>
         </q-card-actions>
       </q-card>
     </div>
@@ -157,6 +192,7 @@ export default defineComponent({
       stars: 4,
       validForm: false,
       emailRegex: /^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[A-Z]{2,}$/i,
+      consultationDate: new Date(),
     };
   },
   watch: {

@@ -57,6 +57,7 @@
           clickable
           :active="`/${route.link}` === $route.path"
           :to="`/${route.link}`"
+          active-class="bg-primary text-white"
         >
           <q-item-section v-if="route.icon" avatar>
             <q-icon :name="route.icon" />

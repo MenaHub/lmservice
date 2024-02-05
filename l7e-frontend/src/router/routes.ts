@@ -32,6 +32,12 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/book-a-consultation',
         component: () => import('pages/CalendarPage.vue'),
+        children: [
+          {
+            path: '?date=:date',
+            component: () => import('pages/CalendarPage.vue'),
+          },
+        ],
       },
     ],
   },
