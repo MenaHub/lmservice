@@ -34,7 +34,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('pages/CalendarPage.vue'),
         children: [
           {
-            path: '?date=:date',
+            path: ':date',
             component: () => import('pages/CalendarPage.vue'),
           },
         ],

@@ -158,9 +158,7 @@
                     color="primary"
                     label="Book"
                     @click="
-                      $router.push(
-                        `/book-a-consultation?date=${consultationDate}`
-                      )
+                      $router.push(`/book-a-consultation/${consultationDate}`)
                     "
                   />
                 </div>
