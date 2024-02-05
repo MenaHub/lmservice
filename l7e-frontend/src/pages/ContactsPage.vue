@@ -2,74 +2,67 @@
   <q-page class="row flex-center" style="column-gap: 4rem">
     <div
       class="q-pa-md"
-      :class="$q.screen.gt.sm ? 'col-6 q-mb-none' : 'col-12 q-mb-xl'"
-      style="max-width: 400px"
+      :class="$q.screen.gt.sm ? 'col q-mb-none' : 'col-12 q-mb-xl'"
     >
       <p class="text-h3">Contact us</p>
       <p class="text-italic text-grey-7 q-mb-xl" style="font-size: 1rem">
         We are here to help you
       </p>
-      <q-form
-        v-model="validForm"
-        @submit="onSubmit"
-        @reset="onReset"
-        @validation-error="onError"
-        class="q-gutter-md"
-      >
+      <q-form @submit.prevent="onSubmit" @reset="onReset" class="q-gutter-md">
         <q-input
+          ref="fullName"
           filled
-          required
-          v-model="fullName"
+          v-model="contactsForm.fullName"
           hint="Name and surname"
-          lazy-rules
           :rules="[
             (val) =>
-              (val && val.length > 0) || 'Please insert your name and surname',
+              isFieldValid(val, 0) || 'Please insert your name and surname',
           ]"
         />
 
         <q-input
+          ref="email"
           filled
-          required
-          v-model="email"
+          v-model="contactsForm.email"
           hint="Your email"
-          lazy-rules
           :rules="[
             (val) => (val !== null && val !== '') || 'Please type your email',
-            (val) =>
-              (val && emailRegex.test(val)) || 'Please type a valid email',
+            (val) => isEmailValid(val) || 'Please type a valid email',
           ]"
         />
 
         <q-input
+          ref="enquirySubject"
           filled
-          required
-          v-model="enquirySubject"
+          counter
+          maxlength="100"
+          v-model="contactsForm.enquirySubject"
           hint="Your enquiry subject"
-          lazy-rules
           :rules="[
             (val) =>
-              (val && val.length > 5) ||
+              isFieldValid(val, 5) ||
               'Please be more specific about your enquiry',
           ]"
         />
 
         <q-input
+          ref="enquiryBody"
           filled
-          required
-          v-model="enquiryBody"
+          autogrow
+          counter
+          maxlength="1000"
+          v-model="contactsForm.enquiryBody"
           hint="Your request/suggestion"
-          lazy-rules
           :rules="[
             (val) =>
-              (val && val.length > 10) ||
+              isFieldValid(val, 10) ||
               'Please be more specific about your request/suggestion',
           ]"
         />
 
         <q-toggle
           required
-          v-model="accept"
+          v-model="contactsForm.accept"
           label="I accept the license and terms"
         />
 
@@ -78,9 +71,8 @@
             label="Submit"
             type="submit"
             color="primary"
-            :disabled="true"
+            :disabled="!validForm"
           />
-          <!-- :disabled="!validForm" -->
           <q-btn
             label="Reset"
             type="reset"
@@ -92,8 +84,8 @@
       </q-form>
     </div>
 
-    <div :class="$q.screen.gt.sm ? 'col' : 'col-12'">
-      <q-card class="my-card" flat bordered>
+    <div class="q-pa-md" :class="$q.screen.gt.sm ? 'col-5' : 'col-12'">
+      <q-card flat bordered>
         <q-img src="src/assets/shop/1-grossa.jpg" />
 
         <q-card-section>
@@ -154,25 +146,61 @@ export default defineComponent({
   components: {},
   data() {
     return {
-      fullName: '',
-      email: '',
-      enquirySubject: '',
-      enquiryBody: '',
-      accept: false,
+      contactsForm: {
+        fullName: '',
+        email: '',
+        enquirySubject: '',
+        enquiryBody: '',
+        accept: false,
+      },
       stars: 4,
       validForm: false,
       emailRegex: /^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[A-Z]{2,}$/i,
     };
   },
+  watch: {
+    contactsForm: {
+      deep: true,
+      handler() {
+        this.validateForm();
+      },
+    },
+  },
   methods: {
+    isFieldValid(val: string, length: number): boolean {
+      return (val && val.length > length) as boolean;
+    },
+    isEmailValid(val: string): boolean {
+      return (val && this.emailRegex.test(val)) as boolean;
+    },
+    validateForm() {
+      this.validForm =
+        this.isFieldValid(this.contactsForm.fullName, 0) &&
+        this.isFieldValid(this.contactsForm.enquirySubject, 5) &&
+        this.isFieldValid(this.contactsForm.enquiryBody, 10) &&
+        this.isEmailValid(this.contactsForm.email) &&
+        (this.contactsForm.accept as boolean);
+    },
     onSubmit() {
       console.log('Form submitted');
+      if (this.contactsForm.accept) {
+        this.contactsForm.accept = false;
+        console.log('Form accepted');
+        this.$q.notify({
+          color: 'positive',
+          message: 'Request sent successfully!',
+          icon: 'check',
+        });
+      }
     },
     onReset() {
-      console.log('Form reset');
-    },
-    onError() {
-      console.log('Validation error');
+      this.contactsForm = {
+        fullName: '',
+        email: '',
+        enquirySubject: '',
+        enquiryBody: '',
+        accept: false,
+      };
     },
     redirectToMaps() {
       const mapsUrl =
