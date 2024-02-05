@@ -1,7 +1,14 @@
 <template>
   <div class="row items-center justify-start">
     <div
-      class="col-12 col-sm-6 col-md-4 q-pa-sm flex flex-center"
+      class="q-pa-sm flex flex-center"
+      :class="[
+        $q.screen.width > 1090
+          ? 'col-4'
+          : $q.screen.width > 760
+          ? 'col-6'
+          : 'col-12',
+      ]"
       v-for="(item, index) in items"
       :key="index"
     >
