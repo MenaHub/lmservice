@@ -6,7 +6,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'HomePage',
+  name: 'ProjectsPage',
   components: {},
   data() {
     return {};

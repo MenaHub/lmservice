@@ -168,14 +168,14 @@ export default defineComponent({
       cartDrawerOpen: false,
       internalRoutes: [
         {
-          title: 'Home',
+          title: 'About',
           icon: 'home',
           link: '',
         },
         {
-          title: 'About',
-          icon: 'info',
-          link: 'about',
+          title: 'Gallery',
+          icon: 'image',
+          link: 'gallery',
         },
         {
           title: 'Services',
@@ -196,6 +196,11 @@ export default defineComponent({
           title: 'Contacts',
           icon: 'contacts',
           link: 'contacts',
+        },
+        {
+          title: 'Book a consultation',
+          icon: 'event',
+          link: 'book-a-consultation',
         },
       ],
       search: '',
