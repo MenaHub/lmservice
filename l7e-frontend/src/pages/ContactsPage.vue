@@ -4,7 +4,7 @@
       class="q-pa-md"
       :class="$q.screen.gt.sm ? 'col q-mb-none' : 'col-12 q-mb-xl'"
     >
-      <p class="text-h3">Contact us</p>
+      <p class="text-h4">Contact us</p>
       <p class="text-italic text-grey-7 q-mb-xl" style="font-size: 1rem">
         We are here to help you
       </p>
