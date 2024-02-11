@@ -60,7 +60,7 @@
       </div>
       <div :class="$q.screen.gt.sm ? 'col-5' : 'col-12'">
         <p class="text-h5 text-italic text-grey-7 q-mb-md">
-          Where Imagination Meets Craftsmanship.
+          Where Imagination Meets Craftsmanship
         </p>
         <p class="text-body1">
           Discover a world where every piece of furniture is a work of art,

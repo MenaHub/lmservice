@@ -16,7 +16,7 @@
         />
 
         <q-toolbar-title class="col-auto"> L.M. Service </q-toolbar-title>
-        <q-input
+        <!-- <q-input
           class="col q-mx-sm"
           dense
           clearable
@@ -30,7 +30,7 @@
           <template v-slot:prepend>
             <q-icon name="search" color="white" />
           </template>
-        </q-input>
+        </q-input> -->
         <q-btn
           flat
           dense
@@ -204,7 +204,7 @@ export default defineComponent({
           link: 'book-a-consultation',
         },
       ],
-      search: '',
+      //search: '',
       shoppingCart: cartStore.cartItems,
     };
   },
