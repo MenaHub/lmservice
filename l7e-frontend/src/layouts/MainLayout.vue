@@ -15,7 +15,24 @@
           @click="toggleMenuDrawer"
         />
 
-        <q-toolbar-title class="col-auto"> L.M. Service </q-toolbar-title>
+        <q-toolbar-title class="col">
+          <q-breadcrumbs>
+            <template v-slot:separator>
+              <q-icon size="1.2em" name="chevron_right" />
+            </template>
+            <q-breadcrumbs-el class="text-white" label="L.M. Service" to="/" />
+            <q-breadcrumbs-el
+              v-if="getCurrentRoute()"
+              :label="getCurrentRoute()?.title"
+              :to="
+                getCurrentRoute()?.link == '/'
+                  ? '/'
+                  : `/${getCurrentRoute()?.link}`
+              "
+            />
+            />
+          </q-breadcrumbs>
+        </q-toolbar-title>
         <!-- <q-input
           class="col q-mx-sm"
           dense
@@ -162,7 +179,6 @@ const cartStore = useCartStore();
 
 export default defineComponent({
   name: 'MainLayout',
-  components: {},
   data() {
     return {
       menuDrawerOpen: false,
@@ -204,7 +220,6 @@ export default defineComponent({
           link: 'book-a-consultation',
         },
       ],
-      //search: '',
       shoppingCart: cartStore.cartItems,
     };
   },
@@ -217,6 +232,12 @@ export default defineComponent({
     },
     removeItemFromCart(item: CartItem) {
       cartStore.removeItemFromCart(item);
+    },
+    getCurrentRoute() {
+      let route = this.internalRoutes
+        .slice(1)
+        .find((route) => this.$route.path.includes(`/${route.link}`));
+      return route ? route : null;
     },
   },
   computed: {
