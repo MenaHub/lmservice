@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page :style-fn="minPageHeight">
     <p class="text-h4">Shop</p>
     <p class="text-italic text-grey-7" style="font-size: 1rem">
       Discover a world where every piece of furniture is a work of art,
@@ -19,6 +19,7 @@
 import { defineComponent } from 'vue';
 import ItemsListComponent from 'src/components/ItemsListComponent.vue';
 import { ShopItem } from 'src/components/models';
+import { minPageHeight } from 'src/utils/sharedFunctions';
 
 export default defineComponent({
   components: { ItemsListComponent },
@@ -46,7 +47,9 @@ export default defineComponent({
       //cardWidth: '200px',
     };
   },
-  methods: {},
+  methods: {
+    minPageHeight,
+  },
 });
 </script>
 <style lang="scss" scoped></style>

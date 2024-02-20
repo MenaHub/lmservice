@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-gutter-md">
+  <q-page class="q-gutter-md" :style-fn="minPageHeight">
     <p class="text-h4">Services</p>
     <p class="text-italic text-grey-7" style="font-size: 1rem">
       Elevating spaces with diverse services tailored to your needs
@@ -40,10 +40,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { minPageHeight } from 'src/utils/sharedFunctions';
 
 export default defineComponent({
   name: 'ServicesPage',
-  components: {},
+  methods: {
+    minPageHeight,
+  },
   data() {
     return {
       services: [

@@ -1,5 +1,9 @@
 <template>
-  <q-page class="row flex-center" style="column-gap: 4rem">
+  <q-page
+    class="row flex-center"
+    style="column-gap: 4rem"
+    :style-fn="minPageHeight"
+  >
     <div
       class="q-pa-md"
       :class="$q.screen.gt.sm ? 'col q-mb-none' : 'col-12 q-mb-xl'"
@@ -174,6 +178,7 @@
 <script lang="ts">
 import { ClientRequest } from 'src/components/models';
 import { defineComponent } from 'vue';
+import { minPageHeight } from 'src/utils/sharedFunctions';
 
 export default defineComponent({
   name: 'ContactsPage',
@@ -202,6 +207,7 @@ export default defineComponent({
     },
   },
   methods: {
+    minPageHeight,
     isFieldValid(val: string, length: number): boolean {
       return (val && val.length > length) as boolean;
     },
@@ -217,7 +223,7 @@ export default defineComponent({
         (this.contactsForm.accept as boolean);
     },
     onSubmit() {
-      this.sendClientRequest(this.contactsForm);
+      this.sendUserEnquiry(this.contactsForm);
       this.$q.notify({
         color: 'positive',
         message: 'Request sent successfully!',
@@ -225,9 +231,12 @@ export default defineComponent({
       });
       this.contactsForm.accept = false;
     },
-    sendClientRequest(form: ClientRequest) {
+    sendUserEnquiry(form: ClientRequest) {
       //console.log('Sending request to the server', form);
       // TODO: send the form to the server through an API
+      this.$api.post('/createUserEnquiry', form).then((response) => {
+        console.log('Server response:', JSON.stringify(response, null, 2));
+      });
     },
     onReset() {
       this.contactsForm = {

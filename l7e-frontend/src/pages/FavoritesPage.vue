@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page :style-fn="minPageHeight">
     <p class="text-h4">Favorites</p>
     <p class="text-italic text-grey-7" style="font-size: 1rem">
       Your liked items, all in one place.
@@ -16,6 +16,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { minPageHeight } from 'src/utils/sharedFunctions';
 import ItemsListComponent from 'src/components/ItemsListComponent.vue';
 import { ShopItem } from 'src/components/models';
 import { useFavoritesStore } from 'src/stores/favorites-store';
@@ -28,6 +29,9 @@ export default defineComponent({
     return {
       items: favoritesStore.favorites as ShopItem[],
     };
+  },
+  methods: {
+    minPageHeight,
   },
 });
 </script>

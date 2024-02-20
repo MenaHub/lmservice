@@ -1,9 +1,5 @@
 <template>
-  <q-layout
-    view="hHh LpR fff"
-    container
-    style="max-width: 1280px; min-height: 100vh"
-  >
+  <q-layout view="hHh LpR fff" style="max-width: 1280px; min-height: 100vh">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -161,6 +157,7 @@
       <router-view class="q-pa-xl" style="width: 90%" />
     </q-page-container>
 
+    <!-- TODO: change the footer into a simple div for ios compatibility -->
     <q-footer elevated>
       <q-toolbar>
         <q-toolbar-title class="row flex-center">

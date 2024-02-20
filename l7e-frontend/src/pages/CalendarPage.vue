@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page :style-fn="minPageHeight">
     <div v-if="confirmedBooking">
       <div class="row flex-center">
         <div class="col-6">
@@ -152,6 +152,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { parse, format } from 'date-fns';
+import { minPageHeight } from 'src/utils/sharedFunctions';
 
 export default defineComponent({
   name: 'CalendarPage',
@@ -185,6 +186,7 @@ export default defineComponent({
       : '';
   },
   methods: {
+    minPageHeight,
     formatDate(
       date: string,
       startingFormat: string = 'yyyy/MM/dd' as string,
@@ -193,6 +195,7 @@ export default defineComponent({
       return format(parse(date, startingFormat, new Date()), goalFormat);
     },
     availableSlots(date: string): string[] {
+      // TODO: get available slots from backend
       return ['09:00', '10:00', '11:00', '14:00', '15:00'];
     },
     openConfirmDialog(slot: string) {

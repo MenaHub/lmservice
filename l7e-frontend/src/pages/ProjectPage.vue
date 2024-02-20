@@ -1,13 +1,17 @@
 <template>
-  <q-page class="row items-center justify-evenly"> </q-page>
+  <q-page class="row items-center justify-evenly" :style-fn="minPageHeight">
+  </q-page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { minPageHeight } from 'src/utils/sharedFunctions';
 
 export default defineComponent({
   name: 'ProjectPage',
-  components: {},
+  methods: {
+    minPageHeight,
+  },
   data() {
     return {};
   },

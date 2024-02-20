@@ -70,7 +70,6 @@ export default defineComponent({
             'src/assets/aim/Brazilian Taste/photo5.jpg',
             'src/assets/aim/Brazilian Taste/photo6.jpg',
             'src/assets/aim/Brazilian Taste/photo7.jpg',
-            'src/assets/aim/Brazilian Taste/photo8.jpg',
             'src/assets/aim/Brazilian Taste/photo9.jpg',
             'src/assets/aim/Brazilian Taste/photo10.jpg',
             'src/assets/aim/Brazilian Taste/photo11.jpg',
@@ -78,7 +77,6 @@ export default defineComponent({
             'src/assets/aim/Brazilian Taste/photo13.jpg',
             'src/assets/aim/Brazilian Taste/photo14.jpg',
             'src/assets/aim/Brazilian Taste/photo15.jpg',
-            'src/assets/aim/Brazilian Taste/photo16.jpg',
           ],
         },
         // Add more projects here
