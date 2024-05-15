@@ -12,7 +12,7 @@ export interface ShopItem {
   material: string;
   description: string;
   price: number;
-  image: string;
+  imagePath: string;
 }
 
 export interface ClientRequest {

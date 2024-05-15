@@ -4,6 +4,7 @@ export default defineConfig({
   lmservice: {
     output: {
       mode: 'tags',
+      target: 'lmservice.ts',
       workspace: 'src/api',
       schemas: './model',
       mock: false, // enable/disable test mock generation

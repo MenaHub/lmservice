@@ -24,6 +24,7 @@ export * from './pageMetadata';
 export * from './pagedModelEntityModelShopItemEntity';
 export * from './pagedModelEntityModelUserEnquiryEntity';
 export * from './representationModelObject';
+export * from './shopItemBean';
 export * from './shopItemEntityRequestBody';
 export * from './userEnquiryBean';
 export * from './userEnquiryEntityRequestBody';
