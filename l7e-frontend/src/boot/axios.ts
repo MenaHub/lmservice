@@ -1,5 +1,6 @@
 import { boot } from 'quasar/wrappers';
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import qs from 'qs';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
@@ -14,7 +15,10 @@ declare module '@vue/runtime-core' {
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: 'https://api.example.com' });
+const api = axios.create({ 
+  //baseURL: process.env.BACKEND_URL, //HIDDEN FOR DEV SERVER PROXY CONFIGURATION
+  paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'comma', indices: false }), // use qs to serialize params in the request URL
+});
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
@@ -29,3 +33,23 @@ export default boot(({ app }) => {
 });
 
 export { api };
+
+export const customInstance = <T>(
+  config: AxiosRequestConfig,
+  options?: AxiosRequestConfig,
+): Promise<T> => {
+  const source = axios.CancelToken.source();
+  const promise = api({
+    ...config,
+    ...options,
+    cancelToken: source.token,
+  }).then(({ data }) => data);
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  promise.cancel = () => {
+    source.cancel('Query was cancelled');
+  };
+
+  return promise;
+};
