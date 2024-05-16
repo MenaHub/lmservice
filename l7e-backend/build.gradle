@@ -29,24 +29,24 @@ ext {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	//implementation 'org.springframework.boot:spring-boot-starter-data-rest' // dependency to auto generate default rest api
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.springframework.boot:spring-boot-starter-quartz'
 	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'io.sentry:sentry-spring-boot-starter-jakarta'
-	implementation 'org.springframework.cloud:spring-cloud-config-server'
-	implementation 'org.springframework.session:spring-session-core'
+	//implementation 'org.springframework.cloud:spring-cloud-config-server'
+	//implementation 'org.springframework.session:spring-session-core'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+	//testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 	//testImplementation 'org.springframework.security:spring-security-test'
-	testImplementation 'org.testcontainers:junit-jupiter'
-	testImplementation 'org.testcontainers:postgresql'
+	//testImplementation 'org.testcontainers:junit-jupiter'
+	//testImplementation 'org.testcontainers:postgresql'
 
 	//swagger
 	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0"

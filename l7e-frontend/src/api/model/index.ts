@@ -5,26 +5,6 @@
  * OpenAPI spec version: v0
  */
 
-export * from './_pagedModelEntityModelShopItemEntityEmbedded';
-export * from './_pagedModelEntityModelUserEnquiryEntityEmbedded';
-export * from './abstractJsonSchemaPropertyObject';
 export * from './bodyBuilder';
-export * from './entityModelShopItemEntity';
-export * from './entityModelUserEnquiryEntity';
-export * from './getCollectionResourceShopitementityGet1Params';
-export * from './getCollectionResourceUserenquiryentityGet1Params';
-export * from './item';
-export * from './itemProperties';
-export * from './jsonSchema';
-export * from './jsonSchemaDefinitions';
-export * from './jsonSchemaProperties';
-export * from './link';
-export * from './links';
-export * from './pageMetadata';
-export * from './pagedModelEntityModelShopItemEntity';
-export * from './pagedModelEntityModelUserEnquiryEntity';
-export * from './representationModelObject';
 export * from './shopItemBean';
-export * from './shopItemEntityRequestBody';
 export * from './userEnquiryBean';
-export * from './userEnquiryEntityRequestBody';
