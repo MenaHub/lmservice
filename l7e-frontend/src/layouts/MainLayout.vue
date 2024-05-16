@@ -58,7 +58,6 @@
     <q-drawer
       overlay
       v-model="menuDrawerOpen"
-      show-if-above
       elevated
       ref="menuDrawer"
     >
@@ -88,7 +87,6 @@
       side="right"
       overlay
       v-model="cartDrawerOpen"
-      show-if-above
       elevated
       ref="cartDrawer"
     >
