@@ -1,0 +1,101 @@
+items:
+  item1:
+    name: "Sword"
+    category: "Category 1"
+    material: "Wood"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat."
+    price: 120
+    imagePath: "src/assets/shop/example-img.jpg"
+  item2:
+    name: "Bow"
+    category: "Category 2"
+    material: "Wood"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                  nisi ut aliquip ex ea commodo consequat."
+    price: 40
+    imagePath: "src/assets/shop/example-img.jpg"
+  item3:
+    name: "Potion"
+    category: "Category 3"
+    material: "Wood"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                  nisi ut aliquip ex ea commodo consequat."
+    price: 17
+    imagePath: "src/assets/shop/example-img.jpg"
+  item4:
+    name: "Armor"
+    category: "Category 4"
+    material: "Wood"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                  nisi ut aliquip ex ea commodo consequat."
+    price: 20
+    imagePath: "src/assets/shop/example-img.jpg"
+  item5:
+    name: "Shield"
+    category: "Category 5"
+    material: "Wood"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                  nisi ut aliquip ex ea commodo consequat."
+    price: 180
+    imagePath: "src/assets/shop/example-img.jpg"
+  item6:
+    name: "Axe"
+    category: "Category 6"
+    material: "Wood"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                  nisi ut aliquip ex ea commodo consequat."
+    price: 150
+    imagePath: "src/assets/shop/example-img.jpg"
+  item7:
+    name: "Staff"
+    category: "Category 7"
+    material: "Wood"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                  nisi ut aliquip ex ea commodo consequat."
+    price: 200
+    imagePath: "src/assets/shop/example-img.jpg"
+  item8:
+    name: "Wand"
+    category: "Category 8"
+    material: "Wood"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                  nisi ut aliquip ex ea commodo consequat."
+    price: 100
+    imagePath: "src/assets/shop/example-img.jpg"
+  item9:
+    name: "Helmet"
+    category: "Category 9"
+    material: "Wood"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                  nisi ut aliquip ex ea commodo consequat."
+    price: 50
+    imagePath: "src/assets/shop/example-img.jpg"
+  item10:
+    name: "Boots"
+    category: "Category 10"
+    material: "Wood"
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                  nisi ut aliquip ex ea commodo consequat."
+    price: 90
+    imagePath: "src/assets/shop/example-img.jpg"

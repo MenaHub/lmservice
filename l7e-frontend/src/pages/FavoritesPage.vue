@@ -5,7 +5,7 @@
       Your liked items, all in one place.
     </p>
     <items-list-component v-if="items.length > 0" :items="items" />
-    <div v-else>
+    <div v-else class="q-pt-xl">
       <div class="row flex-center">
         <q-icon name="heart_broken" size="8rem" color="red" />
       </div>

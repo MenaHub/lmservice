@@ -80,6 +80,7 @@ import { defineComponent, PropType } from 'vue';
 import { ShopItem, CartItem } from 'src/components/models';
 import { useCartStore } from 'src/stores/cart-store';
 import { useFavoritesStore } from 'src/stores/favorites-store';
+import { ShopItemBean } from 'src/api';
 const cartStore = useCartStore();
 const favoritesStore = useFavoritesStore();
 
@@ -87,24 +88,25 @@ export default defineComponent({
   name: 'ExampleComponent',
   props: {
     items: {
-      type: Array as PropType<ShopItem[]>,
+      type: Array as PropType<ShopItemBean[]>,
       required: true,
       default: () => [] as ShopItem[],
     },
   },
   methods: {
-    addToCart(item: ShopItem) {
+    addToCart(item: ShopItemBean) {
       const { id, name, price } = item;
-      const cartItem: CartItem = { id, name, price, quantity: 1 };
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const cartItem: CartItem = { id: id!, name: name!, price: price!, quantity: 1 };
       cartStore.addItemToCart(cartItem);
     },
-    addToFavorites(item: ShopItem) {
+    addToFavorites(item: ShopItemBean) {
       favoritesStore.addItemToFavorites(item);
     },
-    removeFromFavorites(item: ShopItem) {
+    removeFromFavorites(item: ShopItemBean) {
       favoritesStore.removeItemFromFavorites(item);
     },
-    isItemInFavorites(item: ShopItem): boolean {
+    isItemInFavorites(item: ShopItemBean): boolean {
       return favoritesStore.isItemInFavorites(item);
     },
   },
