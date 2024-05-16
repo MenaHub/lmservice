@@ -16,7 +16,7 @@ declare module '@vue/runtime-core' {
 // "export default () => {}" function below (which runs individually
 // for each client)
 const api = axios.create({ 
-  //baseURL: process.env.BACKEND_URL, //HIDDEN FOR DEV SERVER PROXY CONFIGURATION
+  baseURL: process.env.BACKEND_URL, //TO HIDE FOR DEV SERVER PROXY CONFIGURATION
   paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'comma', indices: false }), // use qs to serialize params in the request URL
 });
 
