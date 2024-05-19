@@ -51,6 +51,23 @@
           icon="shopping_cart"
           aria-label="Shopping Cart"
           @click="toogleCartDrawer"
+        >
+          <q-badge
+            v-if="shoppingCart.length > 0"
+            color="red"
+            rounded
+            floating
+            :label="shoppingCart.length"
+          />
+        </q-btn>
+        <q-btn
+          class="q-ml-sm"
+          flat
+          dense
+          round
+          icon="account_circle"
+          aria-label="Account"
+          @click="toogleAccountDrawer"
         />
       </q-toolbar>
     </q-header>
@@ -151,6 +168,52 @@
       </div>
     </q-drawer>
 
+    <q-drawer
+      side="right"
+      overlay
+      v-model="accountDrawerOpen"
+      elevated
+      ref="accountDrawer"
+    >
+    <q-list class="q-mt-md">
+      <q-item>
+        <q-item-section>
+          <div class="text-h6 text-center">Log in</div>
+        </q-item-section>
+      </q-item>
+      <q-item>
+        <q-item-section>
+          <q-input v-model="username" label="Username" />
+        </q-item-section>
+      </q-item>
+      <q-item>
+        <q-item-section>
+          <q-input v-model="password" type="password" label="Password" />
+        </q-item-section>
+      </q-item>
+      <q-item>
+        <q-item-section>
+          <q-btn rounded no-caps label="Log in" color="primary" @click="login" />
+        </q-item-section>
+      </q-item>
+    </q-list>
+    <q-separator class="q-my-md" inset />
+
+    <q-item>
+      <q-item-section>
+        <q-btn
+          icon="img:public/google-logo.png"
+          class="text-black"
+          outline
+          rounded
+          no-caps
+          label="Log in with Google"
+          @click="loginWithGoogle"
+        />
+      </q-item-section>
+    </q-item>
+  </q-drawer>
+
     <q-page-container class="row justify-center">
       <router-view class="q-pa-xl" style="width: 90%" />
     </q-page-container>
@@ -178,6 +241,7 @@ export default defineComponent({
     return {
       menuDrawerOpen: false,
       cartDrawerOpen: false,
+      accountDrawerOpen: false,
       internalRoutes: [
         {
           title: 'About',
@@ -216,6 +280,8 @@ export default defineComponent({
         },
       ],
       shoppingCart: cartStore.cartItems,
+      username: '',
+      password: '',
     };
   },
   methods: {
@@ -223,7 +289,12 @@ export default defineComponent({
       this.menuDrawerOpen = !this.menuDrawerOpen;
     },
     toogleCartDrawer() {
+      this.accountDrawerOpen = false;
       this.cartDrawerOpen = !this.cartDrawerOpen;
+    },
+    toogleAccountDrawer() {
+      this.cartDrawerOpen = false;
+      this.accountDrawerOpen = !this.accountDrawerOpen;
     },
     removeItemFromCart(item: CartItem) {
       cartStore.removeItemFromCart(item);
@@ -234,6 +305,16 @@ export default defineComponent({
         .find((route) => this.$route.path.includes(`/${route.link}`));
       return route ? route : null;
     },
+    login() {
+      // Add your login logic here
+      console.log('Logging in with username:', this.username, 'and password:', this.password);
+      // Example: You may use an authentication service to authenticate the user
+    },
+    loginWithGoogle() {
+      // Add your Google login logic here
+      console.log('Logging in with Google');
+      // Example: You may use OAuth2 authentication with Google APIs
+    }
   },
   computed: {
     getCartTotal(): number {
