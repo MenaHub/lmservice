@@ -36,6 +36,7 @@
                 <p style="font-size: 0.75rem">{{ item.material }}</p>
               </div>
             </div>
+            <q-item-label class="text-bold"> {{ item.name }}</q-item-label>
             <q-item-label>{{ item.description }}</q-item-label>
             <q-item-label class="flex justify-end">
               <p class="q-mt-md">{{ '€ ' + item.price }}</p>

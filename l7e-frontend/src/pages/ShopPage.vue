@@ -27,21 +27,6 @@ export default defineComponent({
   name: 'ShopPage',
   data() {
     const items: ShopItemBean[] = [];
-    // const items: ShopItem[] = [];
-    // for (let i = 1; i <= 10; i++) {
-    //   items.push({
-    //     id: `${i}`,
-    //     name: `Item ${i}`,
-    //     category: `Category ${i}`,
-    //     material: `Material ${i}`,
-    //     description: `${i} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-    //           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-    //           enim ad minim veniam, quis nostrud exercitation ullamco laboris
-    //           nisi ut aliquip ex ea commodo consequat.`,
-    //     price: i * 10,
-    //     image: 'src/assets/shop/example-img.jpg',
-    //   });
-    // }
 
     return {
       items,
