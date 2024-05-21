@@ -1,6 +1,6 @@
 <template>
-  <q-page class="flex" style="row-gap: 2rem" :style-fn="minPageHeight">
-    <div class="row">
+  <q-page>
+    <div class="q-mb-lg">
       <p class="text-h3">Welcome to L.M. Service</p>
     </div>
     <div class="row" style="column-gap: 4rem">
@@ -98,16 +98,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { minPageHeight } from 'src/utils/sharedFunctions';
 
 export default defineComponent({
   name: 'AboutPage',
   components: {},
   data() {
     return {};
-  },
-  methods: {
-    minPageHeight,
   },
 });
 </script>

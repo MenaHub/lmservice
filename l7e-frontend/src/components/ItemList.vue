@@ -78,7 +78,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { ShopItem, CartItem } from 'src/components/models';
+import { CartItem } from 'src/components/models';
 import { useCartStore } from 'src/stores/cart-store';
 import { useFavoritesStore } from 'src/stores/favorites-store';
 import { ShopItemBean } from 'src/api';
@@ -91,7 +91,7 @@ export default defineComponent({
     items: {
       type: Array as PropType<ShopItemBean[]>,
       required: true,
-      default: () => [] as ShopItem[],
+      default: () => [] as ShopItemBean[],
     },
   },
   methods: {

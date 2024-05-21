@@ -5,7 +5,7 @@
       Discover a world where every piece of furniture is a work of art,
       meticulously crafted to elevate your living spaces.
     </p>
-    <items-list-component v-if="items.length > 0" :items="items" />
+    <item-list v-if="items.length > 0" :items="items" />
     <div v-else class="q-pt-xl">
       <div class="row flex-center">
         <q-icon name="warning" size="8rem" color="orange-3" />
@@ -17,13 +17,13 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import ItemsListComponent from 'src/components/ItemsListComponent.vue';
+import ItemList from 'src/components/ItemList.vue';
 import { minPageHeight } from 'src/utils/sharedFunctions';
 import { ShopItemBean } from 'src/api/model'
 import { getItems } from 'src/api/shop-controller'
 
 export default defineComponent({
-  components: { ItemsListComponent },
+  components: { ItemList },
   name: 'ShopPage',
   data() {
     const items: ShopItemBean[] = [];
@@ -37,7 +37,10 @@ export default defineComponent({
     minPageHeight,
   },
   async created() {
-    this.items = await getItems();
+    this.items = await getItems().catch((error) => {
+      console.error('Error while getting shop items', error);
+      return [];
+    });
   },
 });
 </script>
