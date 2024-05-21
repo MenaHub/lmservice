@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh LpR fff" style="max-width: 1280px; min-height: 100vh">
+  <q-layout view="hHh LpR fFf" style="max-width: 1280px; min-height: 100vh">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -73,6 +73,7 @@
     </q-header>
 
     <q-drawer
+      class="q-mt-sm"
       overlay
       v-model="menuDrawerOpen"
       elevated
@@ -101,6 +102,7 @@
     </q-drawer>
 
     <q-drawer
+      class="q-mt-sm"
       side="right"
       overlay
       v-model="cartDrawerOpen"
@@ -109,7 +111,11 @@
     >
       <div v-if="shoppingCart.length > 0">
         <q-list>
-          <q-item-label header> Shopping cart</q-item-label>
+          <q-item>
+            <q-item-section>
+              <div class="text-h6 text-center">Shopping cart</div>
+            </q-item-section>
+          </q-item>
           <q-item v-for="item in shoppingCart" :key="item.id">
             <q-item-section class="col-6 q-ml-sm">
               <q-item-label class="ellipsis">{{ item.name }}</q-item-label>
@@ -169,52 +175,92 @@
     </q-drawer>
 
     <q-drawer
+      class="q-mt-sm"
       side="right"
       overlay
       v-model="accountDrawerOpen"
       elevated
       ref="accountDrawer"
     >
-    <q-list class="q-mt-md">
-      <q-item>
-        <q-item-section>
-          <div class="text-h6 text-center">Log in</div>
-        </q-item-section>
-      </q-item>
-      <q-item>
-        <q-item-section>
-          <q-input v-model="username" label="Username" />
-        </q-item-section>
-      </q-item>
-      <q-item>
-        <q-item-section>
-          <q-input v-model="password" type="password" label="Password" />
-        </q-item-section>
-      </q-item>
-      <q-item>
-        <q-item-section>
-          <q-btn rounded no-caps label="Log in" color="primary" @click="login" />
-        </q-item-section>
-      </q-item>
-    </q-list>
-    <q-separator class="q-my-md" inset />
+      <q-list v-if="!userLoggedIn">
+        <q-item>
+          <q-item-section>
+            <div class="text-h6 text-center">Log in</div>
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-input v-model="username" label="Username" />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-input v-model="password" :type="showPassword ? 'text' : 'password'" label="Password">
+              <template v-slot:append>
+                <q-icon
+                  v-if="password !== ''"
+                  :name="showPassword ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="showPassword = !showPassword"
+                />
+              </template>
+            </q-input>
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-btn rounded no-caps label="Log in" color="primary" @click="login" />
+          </q-item-section>
+        </q-item>
 
-    <q-item>
-      <q-item-section>
-        <q-btn
-          icon="img:public/google-logo.png"
-          class="text-black"
-          outline
-          rounded
-          no-caps
-          label="Log in with Google"
-          @click="loginWithGoogle"
-        />
-      </q-item-section>
-    </q-item>
-  </q-drawer>
+        <q-separator class="q-my-md" inset />
+      
+        <q-item>
+          <GoogleLogin
+            class="full-width"
+            :callback="callback"
+            prompt
+            auto-login
+            @click="loginWithGoogle"
+          >
+            <q-btn
+              icon="img:/google-logo.png"
+              class="text-black full-width"
+              outline
+              rounded
+              no-caps
+              label="Log in with Google"
+            />
+          </GoogleLogin>
+        </q-item>
+      </q-list>
+      <q-list v-else>
+        <q-item>
+          <q-item-section>
+            <div class="text-h6 text-center"> Welcome, {{ username  || 'User'}}!</div>
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section class="flex-center">
+            <q-avatar size="8rem">
+              <img src="https://cdn.quasar.dev/img/avatar4.jpg" />
+            </q-avatar>
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-btn rounded no-caps label="My account" color="primary" />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section>
+            <q-btn rounded no-caps label="Log out" color="red-5" @click="userLogout" />
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-drawer>
 
-    <q-page-container class="row justify-center">
+    <q-page-container class="flex justify-center">
       <router-view class="q-pa-xl" style="width: 90%" />
     </q-page-container>
 
@@ -233,12 +279,16 @@
 import { defineComponent } from 'vue';
 import { CartItem } from 'src/components/models';
 import { useCartStore } from 'src/stores/cart-store';
+import { GoogleLogin, googleLogout, decodeCredential } from 'vue3-google-login';
 const cartStore = useCartStore();
 
 export default defineComponent({
   name: 'MainLayout',
+  components: { GoogleLogin },
   data() {
     return {
+      userLoggedIn: false,
+      showPassword: false,
       menuDrawerOpen: false,
       cartDrawerOpen: false,
       accountDrawerOpen: false,
@@ -305,16 +355,28 @@ export default defineComponent({
         .find((route) => this.$route.path.includes(`/${route.link}`));
       return route ? route : null;
     },
+    callback(response: any) {
+      this.userLoggedIn = true;
+      //const userData = decodeCredential(response.credential)
+      //console.log("Handle the userData: ", userData)
+      console.log("Response: ", response);
+    },
+    userLogout(){
+      this.userLoggedIn = false;
+      googleLogout();
+    },
     login() {
-      // Add your login logic here
+      // TODO: add standard login logic here
       console.log('Logging in with username:', this.username, 'and password:', this.password);
       // Example: You may use an authentication service to authenticate the user
     },
     loginWithGoogle() {
-      // Add your Google login logic here
+      // TODO: add Google login logic here
       console.log('Logging in with Google');
-      // Example: You may use OAuth2 authentication with Google APIs
-    }
+      // TODO: use OAuth2 authentication with Google APIs
+
+
+    },
   },
   computed: {
     getCartTotal(): number {

@@ -12,7 +12,6 @@ const { configure } = require('quasar/wrappers');
 const path = require('path');
 
 const dotenv = require('dotenv');
-const { Notify } = require('quasar');
 
 const envVariables = dotenv.config({
   path: `.env.local`,
@@ -38,7 +37,7 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: ['i18n', 'axios'],
+    boot: ['i18n', 'axios', 'googleAuth'],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: ['app.scss'],
@@ -76,7 +75,11 @@ module.exports = configure(function (ctx) {
 
       // publicPath: '/',
       // analyze: true,
-      env: {},
+      env: {
+        BACKEND_URL: process.env.BACKEND_URL,
+        API_ENDPOINT: process.env.API_ENDPOINT,
+        GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+      },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
