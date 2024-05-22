@@ -79,6 +79,7 @@ module.exports = configure(function (ctx) {
         BACKEND_URL: process.env.BACKEND_URL,
         API_ENDPOINT: process.env.API_ENDPOINT,
         GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+        CUSTOM_LOGIN_ENABLED: process.env.CUSTOM_LOGIN_ENABLED,
       },
       // rawDefine: {}
       // ignorePublicFolder: true,

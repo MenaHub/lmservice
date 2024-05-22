@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hHh LpR fFf" style="max-width: 1280px; min-height: 100vh">
+  <q-layout view="hHh LpR fff" style="min-height: 100vh">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -73,7 +73,7 @@
     </q-header>
 
     <q-drawer
-      class="q-mt-sm"
+      class="q-pt-sm"
       overlay
       v-model="menuDrawerOpen"
       elevated
@@ -102,7 +102,7 @@
     </q-drawer>
 
     <q-drawer
-      class="q-mt-sm"
+      class="q-pt-sm"
       side="right"
       overlay
       v-model="cartDrawerOpen"
@@ -175,14 +175,14 @@
     </q-drawer>
 
     <q-drawer
-      class="q-mt-sm"
+      class="q-pt-sm"
       side="right"
       overlay
       v-model="accountDrawerOpen"
       elevated
       ref="accountDrawer"
     >
-      <q-list v-if="!userLoggedIn">
+      <q-list v-if="!userLoggedIn && customLogin">
         <q-item>
           <q-item-section>
             <div class="text-h6 text-center">Log in</div>
@@ -209,32 +209,32 @@
         </q-item>
         <q-item>
           <q-item-section>
-            <q-btn rounded no-caps label="Log in" color="primary" @click="login" />
+            <q-btn rounded no-caps label="Log in" color="primary" @click="classicLogin" />
           </q-item-section>
         </q-item>
 
         <q-separator class="q-my-md" inset />
-      
-        <q-item>
-          <GoogleLogin
-            class="full-width"
-            :callback="callback"
-            prompt
-            auto-login
-            @click="loginWithGoogle"
-          >
-            <q-btn
-              icon="img:/google-logo.png"
-              class="text-black full-width"
-              outline
-              rounded
-              no-caps
-              label="Log in with Google"
-            />
-          </GoogleLogin>
-        </q-item>
       </q-list>
-      <q-list v-else>
+      
+      <q-item>
+        <GoogleLogin
+          class="full-width"
+          :callback="callback"
+          popup-type="TOKEN"
+          prompt
+        >
+          <q-btn
+            icon="img:/google-logo.png"
+            class="text-black full-width"
+            outline
+            rounded
+            no-caps
+            label="Log in with Google"
+          />
+        </GoogleLogin>
+      </q-item>
+      
+      <q-list v-if="userLoggedIn">
         <q-item>
           <q-item-section>
             <div class="text-h6 text-center"> Welcome, {{ username  || 'User'}}!</div>
@@ -261,10 +261,9 @@
     </q-drawer>
 
     <q-page-container class="flex justify-center">
-      <router-view class="q-pa-xl" style="width: 90%" />
+      <router-view class="q-pa-xl" style="max-width: 1280px; width: 90%" />
     </q-page-container>
 
-    <!-- TODO: change the footer into a simple div for ios compatibility -->
     <q-footer elevated>
       <q-toolbar>
         <q-toolbar-title class="row flex-center">
@@ -279,7 +278,7 @@
 import { defineComponent } from 'vue';
 import { CartItem } from 'src/components/models';
 import { useCartStore } from 'src/stores/cart-store';
-import { GoogleLogin, googleLogout, decodeCredential } from 'vue3-google-login';
+import { GoogleLogin, googleLogout } from 'vue3-google-login';
 const cartStore = useCartStore();
 
 export default defineComponent({
@@ -287,6 +286,7 @@ export default defineComponent({
   components: { GoogleLogin },
   data() {
     return {
+      customLogin: process.env.CUSTOM_LOGIN_ENABLED === 'true',
       userLoggedIn: false,
       showPassword: false,
       menuDrawerOpen: false,
@@ -356,16 +356,15 @@ export default defineComponent({
       return route ? route : null;
     },
     callback(response: any) {
-      this.userLoggedIn = true;
-      //const userData = decodeCredential(response.credential)
-      //console.log("Handle the userData: ", userData)
-      console.log("Response: ", response);
+      //console.log("Response", response)
+      console.log("Access token", response.access_token)
+      //validateToken({accessToken: response.access_token})
     },
     userLogout(){
       this.userLoggedIn = false;
       googleLogout();
     },
-    login() {
+    classicLogin() {
       // TODO: add standard login logic here
       console.log('Logging in with username:', this.username, 'and password:', this.password);
       // Example: You may use an authentication service to authenticate the user
