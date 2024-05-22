@@ -1,22 +1,21 @@
 package it.lmservice.ecommerce;
 
 import it.lmservice.ecommerce.service.InitService;
-import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class InitListener implements ApplicationListener<ContextRefreshedEvent> {
+public class InitListener{
 
     @Autowired
     private InitService initService;
 
-    @Override
-    public void onApplicationEvent(@NotNull ContextRefreshedEvent event) {
+    @EventListener(ApplicationReadyEvent.class)
+    public void onApplicationReadyEvent() {
         System.out.println("INIT LISTENER STARTED");
 
         try{
