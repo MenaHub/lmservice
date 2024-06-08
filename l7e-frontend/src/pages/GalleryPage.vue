@@ -6,7 +6,7 @@
         A glimpse of our creations
       </p>
       <q-card
-        class="my-card"
+        class="q-mb-xl"
         v-for="(project, i) in projects"
         :key="i"
         :name="project.title"
@@ -47,39 +47,51 @@ export default defineComponent({
         {
           routeTitle: 'BB_Bistro',
           title: 'BB Bistrò',
-          description: 'BB Bistrò desription',
-          photos: [
-            'src/assets/aim/BB Bistrò/photo1.jpg',
-            'src/assets/aim/BB Bistrò/photo2.jpg',
-            'src/assets/aim/BB Bistrò/photo3.jpg',
-            'src/assets/aim/BB Bistrò/photo4.jpg',
-            'src/assets/aim/BB Bistrò/photo5.jpg',
-            'src/assets/aim/BB Bistrò/photo6.jpg',
-            'src/assets/aim/BB Bistrò/photo7.jpg',
-          ],
+          description: 'BB Bistrò description',
+          photos: this.getBBPhotos(),
         },
         {
           routeTitle: 'Brazilian_Taste',
           title: 'Brazilian Taste',
-          description: 'Brazilian Taste descprition',
-          photos: [
-            'src/assets/aim/Brazilian Taste/photo1.jpg',
-            'src/assets/aim/Brazilian Taste/photo2.jpg',
-            'src/assets/aim/Brazilian Taste/photo3.jpg',
-            'src/assets/aim/Brazilian Taste/photo4.jpg',
-            'src/assets/aim/Brazilian Taste/photo5.jpg',
-            'src/assets/aim/Brazilian Taste/photo6.jpg',
-            'src/assets/aim/Brazilian Taste/photo7.jpg',
-            'src/assets/aim/Brazilian Taste/photo9.jpg',
-            'src/assets/aim/Brazilian Taste/photo10.jpg',
-            'src/assets/aim/Brazilian Taste/photo11.jpg',
-            'src/assets/aim/Brazilian Taste/photo12.jpg',
-            'src/assets/aim/Brazilian Taste/photo13.jpg',
-            'src/assets/aim/Brazilian Taste/photo14.jpg',
-            'src/assets/aim/Brazilian Taste/photo15.jpg',
-          ],
+          description: 'Brazilian Taste description',
+          photos: this.getBrazilianTastePhotos(),
         },
-        // Add more projects here
+        {
+          routeTitle: 'Caos_Calmo',
+          title: 'Caos Calmo',
+          description: 'Caos Calmo description',
+          photos: this.getCaosCalmoPhotos(),
+        },
+        {
+          routeTitle: 'Green_Nest',
+          title: 'Green Nest',
+          description: 'Green Nest description',
+          photos: this.getGreenNestPhotos(),
+        },
+        {
+          routeTitle: 'Hygge',
+          title: 'Hygge',
+          description: 'Hygge description',
+          photos: this.getHyggePhotos(),
+        },
+        {
+          routeTitle: 'MedicalOfficeHeadquarters',
+          title: 'Medical Office Headquarters',
+          description: 'Medical Office Headquarters description',
+          photos: this.getMedicalOfficeHQPhotos(),
+        },
+        {
+          routeTitle: 'Out_of_the_blue',
+          title: 'Out of the blue',
+          description: 'Out of the blue description',
+          photos: this.getOutOfTheBluePhotos(),
+        },
+        {
+          routeTitle: 'Sought_After',
+          title: 'Sought After',
+          description: 'Sought After description',
+          photos: this.getSoughtAfterPhotos(),
+        },
       ],
       carouselIndexes: [] as { currentIndex: number }[],
     };
@@ -87,6 +99,40 @@ export default defineComponent({
   created() {
     this.carouselIndexes = this.projects.map(() => ({ currentIndex: 0 }));
   },
+  methods: {
+    getBBPhotos(){
+      const glob = import.meta.globEager('src/assets/aim/BB_Bistro/*.jpg');
+      return Object.values(glob).map((photo) => photo.default);
+    },
+    getBrazilianTastePhotos(){
+      const glob = import.meta.globEager('src/assets/aim/Brazilian_Taste/*.jpg');
+      return Object.values(glob).map((photo) => photo.default);
+    },
+    getCaosCalmoPhotos(){
+      const glob = import.meta.globEager('src/assets/aim/Caos Calmo/Photos/*/*.jpg');
+      return Object.values(glob).map((photo) => photo.default);
+    },
+    getGreenNestPhotos(){
+      const glob = import.meta.globEager('src/assets/aim/Green_Nest/*.jpg');
+      return Object.values(glob).map((photo) => photo.default);
+    },
+    getHyggePhotos(){
+      const glob = import.meta.globEager('src/assets/aim/Hygge/Photos/*/*.jpg');
+      return Object.values(glob).map((photo) => photo.default);
+    },
+    getMedicalOfficeHQPhotos(){
+      const glob = import.meta.globEager('src/assets/aim/MedicalOfficeHeadquarters/Photos/*/*.jpg');
+      return Object.values(glob).map((photo) => photo.default);
+    },
+    getOutOfTheBluePhotos(){
+      const glob = import.meta.globEager('src/assets/aim/Out of the blue/Photos/*.jpg');
+      return Object.values(glob).map((photo) => photo.default);
+    },
+    getSoughtAfterPhotos(){
+      const glob = import.meta.globEager('src/assets/aim/Sought_After/*.jpg');
+      return Object.values(glob).map((photo) => photo.default);
+    },
+  }
 });
 </script>
 
