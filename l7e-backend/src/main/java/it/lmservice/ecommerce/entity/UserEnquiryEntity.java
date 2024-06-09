@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Table(name = "client_enquiry")
 @Entity
 @Data
@@ -29,5 +31,8 @@ public class UserEnquiryEntity {
 
     @Column(name = "enquiry_body", nullable = false)
     private String enquiryBody;
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
 
 }

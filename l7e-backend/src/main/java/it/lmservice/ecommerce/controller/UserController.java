@@ -16,8 +16,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/createUserEnquiry")
-    public ResponseEntity.BodyBuilder createUserEnquiry(@Valid @RequestBody UserEnquiryBean userEnquiryBean) {
+    public ResponseEntity<?> createUserEnquiry(@Valid @RequestBody UserEnquiryBean userEnquiryBean) {
         userService.createUserEnquiry(userEnquiryBean);
-        return ResponseEntity.ok();
+        return ResponseEntity.ok().build();
     }
 }

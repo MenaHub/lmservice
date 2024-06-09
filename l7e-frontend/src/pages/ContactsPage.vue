@@ -65,7 +65,7 @@
           <q-toggle
             color="white"
             required
-            v-model="contactsForm.accept"
+            v-model="termsAccepted"
             label="I accept the license and terms"
           />
 
@@ -195,8 +195,8 @@ export default defineComponent({
         email: '',
         enquirySubject: '',
         enquiryBody: '',
-        accept: false,
       } as ClientRequest,
+      termsAccepted: false,
       stars: 4,
       validForm: false,
       emailRegex: /^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -206,6 +206,11 @@ export default defineComponent({
   watch: {
     contactsForm: {
       deep: true,
+      handler() {
+        this.validateForm();
+      },
+    },
+    termsAccepted: {
       handler() {
         this.validateForm();
       },
@@ -225,23 +230,34 @@ export default defineComponent({
         this.isFieldValid(this.contactsForm.enquirySubject, 5) &&
         this.isFieldValid(this.contactsForm.enquiryBody, 10) &&
         this.isEmailValid(this.contactsForm.email) &&
-        (this.contactsForm.accept as boolean);
+        this.termsAccepted as boolean;
     },
     onSubmit() {
       this.sendUserEnquiry(this.contactsForm);
-      this.$q.notify({
-        color: 'positive',
-        message: 'Request sent successfully!',
-        icon: 'check',
-      });
-      this.contactsForm.accept = false;
+      this.onReset();
+      //this.validForm = false;
     },
     sendUserEnquiry(form: ClientRequest) {
       //console.log('Sending request to the server', form);
       // TODO: send the form to the server through an API
-      this.$api.post('/createUserEnquiry', form).then((response) => {
+      this.$api.post('/createUserEnquiry', form)
+      .then((response) => {
         console.log('Server response:', JSON.stringify(response, null, 2));
-      });
+        this.$q.notify({
+          color: 'positive',
+          message: 'Request sent successfully!',
+          icon: 'check',
+        });
+      })
+      .catch((error) => {
+        console.error('Error sending the request:', error);
+        this.$q.notify({
+          color: 'negative',
+          message: 'Error sending the request',
+          icon: 'report_problem',
+        });
+        
+      })
     },
     onReset() {
       this.contactsForm = {
@@ -249,8 +265,8 @@ export default defineComponent({
         email: '',
         enquirySubject: '',
         enquiryBody: '',
-        accept: false,
       };
+      this.termsAccepted = false;
     },
     redirectToMaps() {
       const mapsUrl =

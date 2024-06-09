@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 public class UserService {
 
@@ -20,6 +22,7 @@ public class UserService {
     public void createUserEnquiry(UserEnquiryBean userEnquiryBean) {
         //TODO: save user enquiry to database
         UserEnquiryEntity userEnquiryEntity = userEnquiryMapper.toClientEnquiryEntity(userEnquiryBean);
+        userEnquiryEntity.setCreatedAt(LocalDateTime.now());
         userEnquiryRepository.save(userEnquiryEntity);
         //TODO: send email to admin
     }

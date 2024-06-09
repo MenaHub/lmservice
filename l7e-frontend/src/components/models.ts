@@ -10,5 +10,4 @@ export interface ClientRequest {
   email: string;
   enquirySubject: string;
   enquiryBody: string;
-  accept: boolean;
 }
