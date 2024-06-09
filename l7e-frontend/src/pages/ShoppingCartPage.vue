@@ -73,8 +73,8 @@
       </div>
       <q-card class="col text-center q-gutter-y-md rounded-borders" style="height: fit-content;">
         <q-card-section>
-          <p class="text-h6">Total ({{ getCartQuantity + (getCartQuantity == 1 ? ' item' : ' items') }}): </p>
-          <p class="text-h6">{{ '€ ' + getCartTotal }} </p>
+          <p class="text-h6">Total ({{ cartTotalItems + (cartTotalItems == 1 ? ' item' : ' items') }}): </p>
+          <p class="text-h6">{{ '€ ' + cartTotalPrice }} </p>
         </q-card-section>
         <q-card-section>
           <q-btn
@@ -102,20 +102,14 @@ export default defineComponent({
   data() { 
     return {
       shoppingCart: cartStore.cartItems,
+      cartTotalPrice: cartStore.getCartTotal,
+      cartTotalItems: cartStore.getCartQuantity,
     };
   },
   methods: {
     minPageHeight,
     removeItemFromCart(item: CartItem) {
       cartStore.removeItemFromCart(item);
-    },
-  },
-  computed: {
-    getCartQuantity(): number {
-      return this.shoppingCart.reduce((acc, item) => acc + item.quantity, 0);
-    },
-    getCartTotal(): number {
-      return this.shoppingCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
     },
   },
 });

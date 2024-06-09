@@ -1,5 +1,9 @@
 <template>
-    <q-page>
+    <q-page class="q-gutter-md">
+        <p class="text-h4">Checkout</p>
+        <p class="text-italic text-grey-7" style="font-size: 1rem">
+            One step away from enjoying your new items
+        </p>
         <q-card class="checkout-card rounded-borders">
             <q-card-section>
                 <h2 class="text-h6">User Info</h2>
