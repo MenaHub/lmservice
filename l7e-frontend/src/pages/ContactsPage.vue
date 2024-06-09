@@ -8,6 +8,7 @@
       <div :class="$q.screen.gt.sm ? 'col' : 'col-12'">
         <q-form @submit.prevent="onSubmit" @reset="onReset" class="q-gutter-md">
           <q-input
+            bg-color="white"
             ref="fullName"
             filled
             v-model="contactsForm.fullName"
@@ -19,6 +20,7 @@
           />
 
           <q-input
+            bg-color="white"
             ref="email"
             filled
             v-model="contactsForm.email"
@@ -30,6 +32,7 @@
           />
 
           <q-input
+            bg-color="white"
             ref="enquirySubject"
             filled
             counter
@@ -44,6 +47,7 @@
           />
 
           <q-input
+            bg-color="white"
             ref="enquiryBody"
             filled
             autogrow
@@ -59,6 +63,7 @@
           />
 
           <q-toggle
+            color="white"
             required
             v-model="contactsForm.accept"
             label="I accept the license and terms"
@@ -68,14 +73,18 @@
             <q-btn
               label="Submit"
               type="submit"
-              color="primary"
+              text-color="white"
+              color="white"
+              rounded
+              outline
               :disabled="!validForm"
             />
             <q-btn
               label="Reset"
               type="reset"
-              color="primary"
+              color="white"
               flat
+              rounded
               class="q-ml-sm"
             />
           </div>
@@ -83,7 +92,7 @@
       </div>
 
     <div :class="$q.screen.gt.sm ? 'col-5' : 'col-12'">
-      <q-card flat bordered>
+      <q-card class="rounded-borders">
         <q-img src="src/assets/shop/1-grossa.jpg" />
 
         <q-card-section>

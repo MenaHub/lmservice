@@ -5,7 +5,7 @@
       Elevating spaces with diverse services tailored to your needs
     </p>
     <div v-for="(service, index) in services" :key="index">
-      <q-card class="my-card" flat rounded bordered style="min-width: 100%">
+      <q-card class="my-card rounded-borders" style="min-width: 100%">
         <q-card-section
           class="row justify-between items-center"
           :class="index % 2 == 1 && $q.screen.gt.sm ? 'reverse' : ''"

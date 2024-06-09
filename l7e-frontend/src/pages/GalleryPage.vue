@@ -6,7 +6,7 @@
         A glimpse of our creations
       </p>
       <q-card
-        class="q-mb-xl"
+        class="q-mb-xl rounded-borders"
         v-for="(project, i) in projects"
         :key="i"
         :name="project.title"

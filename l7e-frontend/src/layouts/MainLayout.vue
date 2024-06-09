@@ -3,8 +3,7 @@
     <q-header class="gradient-background" style="min-height:fit-content">
       <q-toolbar class="flex-center q-pa-md" style="flex-wrap:wrap; gap:10px">
         <q-btn
-          class="text-black"
-          style="font-size: medium; font-weight: 300; min-width: fit-content;"
+          class="header-footer"
           v-for="route in internalRoutes"
           flat
           unelevated
@@ -152,7 +151,7 @@
 
     <q-footer class="bg-transparent">
       <q-toolbar>
-        <q-toolbar-title class="row flex-center">
+        <q-toolbar-title class="row flex-center header-footer">
           L.M. Service - Copyright {{ new Date().getFullYear() }}
         </q-toolbar-title>
       </q-toolbar>
@@ -256,6 +255,12 @@ export default defineComponent({
   background: linear-gradient(to right, $primary, white);
 }
 
+.header-footer {
+  font-size: medium; 
+  font-weight: 300;
+  color: black;
+  min-width: fit-content;
+}
 .favorite-btn {
   position: fixed;
   bottom: 30px;
