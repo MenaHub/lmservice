@@ -12,13 +12,13 @@
       class="row q-gutter-md"
     >
       <div class="col-9">
-        <q-card v-for="item in shoppingCart" :key="item.id" class="my-card rounded-borders q-mb-md">
+        <q-card v-for="item in shoppingCart" :key="item.id" class="rounded-borders q-mb-md">
           <q-card-section horizontal>
             <q-img class="col-5" src="src/assets/shop/example-img.jpg" />
 
             <q-card-section>
               <!--<div class="row flex-center q-mb-md" style="gap: 5px">
-                <div class="col-10 q-pa-xs text-center rounded-section">
+                <div class="col-10 q-pa-xs text-center rounded-borders">
                   <div class="row items-center">
                     <div class="col-3">
                       <q-icon
@@ -32,7 +32,7 @@
                     </div> 
                   </div>
                 </div>
-                <div class="col-10 q-pa-xs text-center rounded-section">
+                <div class="col-10 q-pa-xs text-center rounded-borders">
                   <p style="font-size: 0.75rem">{{ item.material }}</p>
                 </div> 
               </div>-->
@@ -71,12 +71,10 @@
           </q-card-actions>
         </q-card>
       </div>
-      <q-card class="col text-center q-gutter-y-md" style="height: fit-content;">
+      <q-card class="col text-center q-gutter-y-md rounded-borders" style="height: fit-content;">
         <q-card-section>
-          <p class="text-h6">Total ({{ shoppingCart.length }} item(s) ): </p>
-          <p class="text-h6">
-            {{ '€ ' + getCartTotal }}
-          </p>
+          <p class="text-h6">Total ({{ getCartQuantity + (getCartQuantity == 1 ? ' item' : ' items') }}): </p>
+          <p class="text-h6">{{ '€ ' + getCartTotal }} </p>
         </q-card-section>
         <q-card-section>
           <q-btn
@@ -84,7 +82,7 @@
             label="Proceed to checkout"
             rounded
             no-caps
-            @click="$router.push('/checkout')"
+            to='/checkout'
           />
         </q-card-section>
       </q-card>
@@ -113,11 +111,11 @@ export default defineComponent({
     },
   },
   computed: {
+    getCartQuantity(): number {
+      return this.shoppingCart.reduce((acc, item) => acc + item.quantity, 0);
+    },
     getCartTotal(): number {
-      return this.shoppingCart.reduce(
-        (acc, item) => acc + item.price * item.quantity,
-        0
-      );
+      return this.shoppingCart.reduce((acc, item) => acc + item.price * item.quantity, 0);
     },
   },
 });
