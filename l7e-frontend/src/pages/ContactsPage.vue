@@ -1,94 +1,88 @@
 <template>
-  <q-page
-    class="row flex-center"
-    style="column-gap: 4rem"
-    :style-fn="minPageHeight"
-  >
-    <div
-      class="q-pa-md"
-      :class="$q.screen.gt.sm ? 'col q-mb-none' : 'col-12 q-mb-xl'"
-    >
-      <p class="text-h4">Contact us</p>
-      <p class="text-italic text-grey-7 q-mb-xl" style="font-size: 1rem">
-        We are here to help you
-      </p>
-      <q-form @submit.prevent="onSubmit" @reset="onReset" class="q-gutter-md">
-        <q-input
-          ref="fullName"
-          filled
-          v-model="contactsForm.fullName"
-          hint="Name and surname"
-          :rules="[
-            (val) =>
-              isFieldValid(val, 0) || 'Please insert your name and surname',
-          ]"
-        />
-
-        <q-input
-          ref="email"
-          filled
-          v-model="contactsForm.email"
-          hint="Your email"
-          :rules="[
-            (val) => (val !== null && val !== '') || 'Please type your email',
-            (val) => isEmailValid(val) || 'Please type a valid email',
-          ]"
-        />
-
-        <q-input
-          ref="enquirySubject"
-          filled
-          counter
-          maxlength="100"
-          v-model="contactsForm.enquirySubject"
-          hint="Your enquiry subject"
-          :rules="[
-            (val) =>
-              isFieldValid(val, 5) ||
-              'Please be more specific about your enquiry',
-          ]"
-        />
-
-        <q-input
-          ref="enquiryBody"
-          filled
-          autogrow
-          counter
-          maxlength="1000"
-          v-model="contactsForm.enquiryBody"
-          hint="Your request/suggestion"
-          :rules="[
-            (val) =>
-              isFieldValid(val, 10) ||
-              'Please be more specific about your request/suggestion',
-          ]"
-        />
-
-        <q-toggle
-          required
-          v-model="contactsForm.accept"
-          label="I accept the license and terms"
-        />
-
-        <div>
-          <q-btn
-            label="Submit"
-            type="submit"
-            color="primary"
-            :disabled="!validForm"
+  <q-page class="q-gutter-md" :style-fn="minPageHeight">
+    <p class="text-h4">Contact us</p>
+    <p class="text-italic text-grey-7" style="font-size: 1rem">
+      We are here to help you
+    </p>
+    <div class="row flex-center" style="gap:40px">
+      <div :class="$q.screen.gt.sm ? 'col' : 'col-12'">
+        <q-form @submit.prevent="onSubmit" @reset="onReset" class="q-gutter-md">
+          <q-input
+            ref="fullName"
+            filled
+            v-model="contactsForm.fullName"
+            hint="Name and surname"
+            :rules="[
+              (val) =>
+                isFieldValid(val, 0) || 'Please insert your name and surname',
+            ]"
           />
-          <q-btn
-            label="Reset"
-            type="reset"
-            color="primary"
-            flat
-            class="q-ml-sm"
-          />
-        </div>
-      </q-form>
-    </div>
 
-    <div class="q-pa-md" :class="$q.screen.gt.sm ? 'col-5' : 'col-12'">
+          <q-input
+            ref="email"
+            filled
+            v-model="contactsForm.email"
+            hint="Your email"
+            :rules="[
+              (val) => (val !== null && val !== '') || 'Please type your email',
+              (val) => isEmailValid(val) || 'Please type a valid email',
+            ]"
+          />
+
+          <q-input
+            ref="enquirySubject"
+            filled
+            counter
+            maxlength="100"
+            v-model="contactsForm.enquirySubject"
+            hint="Your enquiry subject"
+            :rules="[
+              (val) =>
+                isFieldValid(val, 5) ||
+                'Please be more specific about your enquiry',
+            ]"
+          />
+
+          <q-input
+            ref="enquiryBody"
+            filled
+            autogrow
+            counter
+            maxlength="1000"
+            v-model="contactsForm.enquiryBody"
+            hint="Your request/suggestion"
+            :rules="[
+              (val) =>
+                isFieldValid(val, 10) ||
+                'Please be more specific about your request/suggestion',
+            ]"
+          />
+
+          <q-toggle
+            required
+            v-model="contactsForm.accept"
+            label="I accept the license and terms"
+          />
+
+          <div>
+            <q-btn
+              label="Submit"
+              type="submit"
+              color="primary"
+              :disabled="!validForm"
+            />
+            <q-btn
+              label="Reset"
+              type="reset"
+              color="primary"
+              flat
+              class="q-ml-sm"
+            />
+          </div>
+        </q-form>
+      </div>
+
+    <div :class="$q.screen.gt.sm ? 'col-5' : 'col-12'">
       <q-card flat bordered>
         <q-img src="src/assets/shop/1-grossa.jpg" />
 
@@ -117,7 +111,7 @@
         </q-card-section>
 
         <q-card-section class="q-pt-none">
-          <div class="text-subtitle1">$・Artisan</div>
+          <div class="text-subtitle1">€・Artisan</div>
           <div class="text-caption text-grey">
             <!--             Custom tailored furniture transforming your spaces into timeless
             expressions of individuality. -->
@@ -125,7 +119,7 @@
           </div>
         </q-card-section>
 
-        <q-separator />
+        <!-- <q-separator />
 
         <q-card-actions
           :class="
@@ -147,7 +141,7 @@
               transition-hide="jump-up"
               transition-duration="800"
             >
-              <!-- get already booked day from gcal api and hide them -->
+              <!- get already booked day from gcal api and hide them ->
               <q-date
                 v-model="consultationDate"
                 :landscape="$q.screen.gt.sm"
@@ -169,9 +163,11 @@
               </q-date>
             </q-popup-proxy>
           </q-btn>
-        </q-card-actions>
+        </q-card-actions> -->
       </q-card>
     </div>
+  </div>
+    
   </q-page>
 </template>
 
