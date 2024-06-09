@@ -66,7 +66,7 @@
             <q-btn flat round color="blue" icon="share" />
           </div>
           <div>
-            <q-btn flat color="primary" @click="addToCart(item)">
+            <q-btn flat rounded color="primary" @click="addToCart(item)">
               Add to cart
             </q-btn>
           </div>
@@ -86,7 +86,7 @@ const cartStore = useCartStore();
 const favoritesStore = useFavoritesStore();
 
 export default defineComponent({
-  name: 'ExampleComponent',
+  name: 'ItemList',
   props: {
     items: {
       type: Array as PropType<ShopItemBean[]>,

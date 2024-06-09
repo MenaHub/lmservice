@@ -1,5 +1,5 @@
 <template>
-  <q-page :style-fn="minPageHeight">
+  <q-page class="q-gutter-md" :style-fn="minPageHeight">
     <p class="text-h4">Favorites</p>
     <p class="text-italic text-grey-7" style="font-size: 1rem">
       Your liked items, all in one place.

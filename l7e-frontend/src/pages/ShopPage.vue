@@ -1,5 +1,5 @@
 <template>
-  <q-page :style-fn="minPageHeight">
+  <q-page class="q-gutter-md" :style-fn="minPageHeight">
     <p class="text-h4">Shop</p>
     <p class="text-italic text-grey-7" style="font-size: 1rem">
       Discover a world where every piece of furniture is a work of art,
