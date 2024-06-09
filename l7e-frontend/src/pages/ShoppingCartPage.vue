@@ -49,6 +49,7 @@
             <q-btn flat round color="blue" icon="share" />
             <div class="q-gutter-x-sm">
               <q-icon
+                v-if="item.quantity > 1"
                 class="cursor-pointer q-mr-sm"
                 name="remove"
                 @click="item.quantity--"
