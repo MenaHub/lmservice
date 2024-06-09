@@ -102,14 +102,20 @@ export default defineComponent({
   data() { 
     return {
       shoppingCart: cartStore.cartItems,
-      cartTotalPrice: cartStore.getCartTotal,
-      cartTotalItems: cartStore.getCartQuantity,
     };
   },
   methods: {
     minPageHeight,
     removeItemFromCart(item: CartItem) {
       cartStore.removeItemFromCart(item);
+    },
+  },
+  computed: {
+    cartTotalPrice() {
+      return cartStore.getCartTotal;
+    },
+    cartTotalItems() {
+      return cartStore.getCartQuantity;
     },
   },
 });
