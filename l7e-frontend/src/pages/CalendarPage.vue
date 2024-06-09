@@ -41,33 +41,25 @@
 
         <template v-slot:after>
           <q-tab-panels
+            class="bg-transparent"
             v-model="date"
             transition-prev="jump-up"
             transition-next="jump-down"
             transition-duration="8000"
           >
             <q-tab-panel :name="date">
-              <div class="text-h4 q-mb-md">{{ formatDate(date) }}</div>
-              <div
+              <div class="text-h4 text-center q-mb-md">{{ formatDate(date) }}</div>
+              <q-btn
+                class="q-mb-sm full-width"
                 v-for="slot in availableSlots(date)"
                 :key="slot"
-                class="q-mb-sm"
-                style="border: 1px solid #000000; border-radius: 40px"
-              >
-                <q-item
-                  clickable
-                  v-ripple
-                  :key="slot"
-                  @click="openConfirmDialog(slot)"
-                >
-                  <q-item-section>
-                    <q-item-label>{{ slot }}</q-item-label>
-                  </q-item-section>
-                  <q-item-section side>
-                    <q-icon name="event" />
-                  </q-item-section>
-                </q-item>
-              </div>
+                :label="'Book at ' + slot"
+                @click="openConfirmDialog(slot)"
+                icon="event"
+                no-caps
+                rounded
+                outline
+              />
             </q-tab-panel>
           </q-tab-panels>
         </template>

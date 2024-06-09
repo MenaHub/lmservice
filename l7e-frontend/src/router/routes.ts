@@ -26,19 +26,27 @@ const routes: RouteRecordRaw[] = [
         ],
       },
       {
+        path: '/shopping-cart',
+        component: () => import('pages/ShoppingCartPage.vue'),
+      },
+      {
+        path: '/checkout',
+        component: () => import('pages/CheckoutPage.vue'),
+      },
+      {
         path: '/favorites',
         component: () => import('pages/FavoritesPage.vue'),
       },
-      {
-        path: '/book-a-consultation',
-        component: () => import('pages/CalendarPage.vue'),
-        children: [
-          {
-            path: ':date',
-            component: () => import('pages/CalendarPage.vue'),
-          },
-        ],
-      },
+      // {
+      //   path: '/book-a-consultation',
+      //   component: () => import('pages/CalendarPage.vue'),
+      //   children: [
+      //     {
+      //       path: ':date',
+      //       component: () => import('pages/CalendarPage.vue'),
+      //     },
+      //   ],
+      // },
     ],
   },
 
