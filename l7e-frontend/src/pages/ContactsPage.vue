@@ -200,7 +200,7 @@ export default defineComponent({
       stars: 4,
       validForm: false,
       emailRegex: /^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[A-Z]{2,}$/i,
-      consultationDate: new Date(),
+      //consultationDate: new Date(),
     };
   },
   watch: {
@@ -235,7 +235,6 @@ export default defineComponent({
     onSubmit() {
       this.sendUserEnquiry(this.contactsForm);
       this.onReset();
-      //this.validForm = false;
     },
     sendUserEnquiry(form: ClientRequest) {
       //console.log('Sending request to the server', form);
@@ -260,12 +259,6 @@ export default defineComponent({
       })
     },
     onReset() {
-      this.contactsForm = {
-        fullName: '',
-        email: '',
-        enquirySubject: '',
-        enquiryBody: '',
-      };
       this.termsAccepted = false;
     },
     redirectToMaps() {
