@@ -24,7 +24,7 @@
               v-if="service.title === 'Artisanal Stock Furniture'"
               class="flex justify-end q-mt-md"
             >
-              <q-btn color="primary" label="Go to shop" to="/shop" />
+              <q-btn rounded color="primary" label="Go to shop" to="/shop" />
             </div>
           </q-card-section>
 

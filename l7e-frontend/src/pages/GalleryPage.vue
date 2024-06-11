@@ -1,43 +1,47 @@
 <template>
-  <q-page class="q-pa-md">
-    <div class="q-gutter-md">
-      <p class="text-h4">Gallery</p>
-      <p class="text-italic text-grey-7" style="font-size: 1rem">
-        A glimpse of our creations
-      </p>
-      <q-card
-        class="q-mb-xl rounded-borders"
-        v-for="(project, i) in projects"
-        :key="i"
-        :name="project.title"
+  <q-page class="q-pa-md q-gutter-md">
+    <p class="text-h4">Gallery</p>
+    <p class="text-italic text-grey-7" style="font-size: 1rem">
+      A glimpse of our creations
+    </p>
+    <q-card
+      class="q-mb-xl rounded-borders"
+      v-for="(project, i) in projects"
+      :key="i"
+      :name="project.title"
+    >
+      <q-carousel
+        swipeable
+        arrows
+        navigation
+        animated
+        infinite
+        v-model="carouselIndexes[i].currentIndex"
       >
-        <q-carousel
-          swipeable
-          arrows
-          navigation
-          animated
-          infinite
-          v-model="carouselIndexes[i].currentIndex"
+        <q-carousel-slide
+          v-for="(photo, j) in project.photos"
+          :key="j"
+          :name="j"
+          :img-src="photo"
         >
-          <q-carousel-slide
-            v-for="(photo, j) in project.photos"
-            :key="j"
-            :name="j"
-            :img-src="photo"
+          <div 
+            class="absolute-top custom-caption cursor-pointer" 
+            @click.capture="$router.push(`/gallery/${project.routeTitle}`)"
           >
-            <div class="absolute-top custom-caption" style="cursor: pointer">
-              <div class="text-h2">{{ project.title }}</div>
-              <div class="text-subtitle1">{{ project.description }}</div>
+            <div class="text-h2">{{ project.title }}</div>
+            <div class="text-subtitle1">
+              <q-icon name="place" /> {{ project.location }}
             </div>
-          </q-carousel-slide>
-        </q-carousel>
-      </q-card>
-    </div>
+          </div>
+        </q-carousel-slide>
+      </q-carousel>
+    </q-card>
   </q-page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { projectPhotos } from '../utils/projectPhotos';
 
 export default defineComponent({
   name: 'GalleryPage',
@@ -47,50 +51,50 @@ export default defineComponent({
         {
           routeTitle: 'BB_Bistro',
           title: 'BB Bistrò',
-          description: 'BB Bistrò description',
-          photos: this.getBBPhotos(),
+          location: 'Milan, Italy',
+          photos: projectPhotos['BB_Bistro'](),
         },
         {
           routeTitle: 'Brazilian_Taste',
           title: 'Brazilian Taste',
-          description: 'Brazilian Taste description',
-          photos: this.getBrazilianTastePhotos(),
+          location: 'Rome, Italy',
+          photos: projectPhotos['Brazilian_Taste'](), 
         },
         {
           routeTitle: 'Caos_Calmo',
           title: 'Caos Calmo',
-          description: 'Caos Calmo description',
-          photos: this.getCaosCalmoPhotos(),
+          location: 'Madrid, Spain',
+          photos: projectPhotos['Caos_Calmo'](),
         },
         {
           routeTitle: 'Green_Nest',
           title: 'Green Nest',
-          description: 'Green Nest description',
-          photos: this.getGreenNestPhotos(),
+          location: 'Seregno, Italy',
+          photos: projectPhotos['Green_Nest'](),
         },
         {
           routeTitle: 'Hygge',
           title: 'Hygge',
-          description: 'Hygge description',
-          photos: this.getHyggePhotos(),
+          location: 'London, UK',
+          photos: projectPhotos['Hygge'](),
         },
         {
-          routeTitle: 'MedicalOfficeHeadquarters',
+          routeTitle: 'Medical_Office_Headquarters',
           title: 'Medical Office Headquarters',
-          description: 'Medical Office Headquarters description',
-          photos: this.getMedicalOfficeHQPhotos(),
+          location: 'Monza, Italy',
+          photos: projectPhotos['Medical_Office_Headquarters'](),
         },
         {
-          routeTitle: 'Out_of_the_blue',
+          routeTitle: 'Out_Of_The_Blue',
           title: 'Out of the blue',
-          description: 'Out of the blue description',
-          photos: this.getOutOfTheBluePhotos(),
+          location: 'Florence, Italy',
+          photos: projectPhotos['Out_Of_The_Blue'](),
         },
         {
           routeTitle: 'Sought_After',
           title: 'Sought After',
-          description: 'Sought After description',
-          photos: this.getSoughtAfterPhotos(),
+          location: 'Milan, Italy',
+          photos: projectPhotos['Sought_After'](),
         },
       ],
       carouselIndexes: [] as { currentIndex: number }[],
@@ -99,40 +103,6 @@ export default defineComponent({
   created() {
     this.carouselIndexes = this.projects.map(() => ({ currentIndex: 0 }));
   },
-  methods: {
-    getBBPhotos(){
-      const glob = import.meta.globEager('src/assets/aim/BB_Bistro/*.jpg');
-      return Object.values(glob).map((photo) => photo.default);
-    },
-    getBrazilianTastePhotos(){
-      const glob = import.meta.globEager('src/assets/aim/Brazilian_Taste/*.jpg');
-      return Object.values(glob).map((photo) => photo.default);
-    },
-    getCaosCalmoPhotos(){
-      const glob = import.meta.globEager('src/assets/aim/Caos Calmo/Photos/*/*.jpg');
-      return Object.values(glob).map((photo) => photo.default);
-    },
-    getGreenNestPhotos(){
-      const glob = import.meta.globEager('src/assets/aim/Green_Nest/*.jpg');
-      return Object.values(glob).map((photo) => photo.default);
-    },
-    getHyggePhotos(){
-      const glob = import.meta.globEager('src/assets/aim/Hygge/Photos/*/*.jpg');
-      return Object.values(glob).map((photo) => photo.default);
-    },
-    getMedicalOfficeHQPhotos(){
-      const glob = import.meta.globEager('src/assets/aim/MedicalOfficeHeadquarters/Photos/*/*.jpg');
-      return Object.values(glob).map((photo) => photo.default);
-    },
-    getOutOfTheBluePhotos(){
-      const glob = import.meta.globEager('src/assets/aim/Out of the blue/Photos/*.jpg');
-      return Object.values(glob).map((photo) => photo.default);
-    },
-    getSoughtAfterPhotos(){
-      const glob = import.meta.globEager('src/assets/aim/Sought_After/*.jpg');
-      return Object.values(glob).map((photo) => photo.default);
-    },
-  }
 });
 </script>
 
@@ -144,3 +114,4 @@ export default defineComponent({
   background-color: rgba(0, 0, 0, 0.3);
 }
 </style>
+../utils/projectPhotos
