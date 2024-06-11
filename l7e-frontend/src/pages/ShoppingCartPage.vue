@@ -82,7 +82,6 @@
             color="primary"
             label="Proceed to checkout"
             rounded
-            no-caps
             to='/checkout'
           />
         </q-card-section>

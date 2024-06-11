@@ -18,7 +18,7 @@
 
           <q-card-section>
             <div class="row flex-center q-mb-md" style="gap: 5px">
-              <div class="col-10 q-pa-xs text-center rounded-section">
+              <div class="col-10 q-pa-xs text-center rounded-borders">
                 <div class="row items-center">
                   <div class="col-3">
                     <q-icon
@@ -32,8 +32,19 @@
                   </div>
                 </div>
               </div>
-              <div class="col-10 q-pa-xs text-center rounded-section">
-                <p style="font-size: 0.75rem">{{ item.material }}</p>
+              <div class="col-10 q-pa-xs text-center rounded-borders">
+                <div class="row items-center">
+                  <div class="col-3">
+                    <q-icon
+                      name="circle"
+                      color="red"
+                      style="font-size: 1rem"
+                    />
+                  </div>
+                  <div class="col" style="font-size: 0.75rem">
+                    {{ item.material }}
+                  </div>
+                </div>
               </div>
             </div>
             <q-item-label class="text-bold"> {{ item.name }}</q-item-label>
@@ -116,15 +127,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.rounded-borders {
-  border-radius: 10px;
-  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.24);
-}
-
-.rounded-section {
-  border-radius: 20px;
-  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.24);
-}
 .my-card {
   width: 100%;
   max-width: 350px;
