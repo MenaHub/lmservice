@@ -1,4 +1,14 @@
 // app global css in SCSS form
+
+@font-face {
+  font-family: NothingYouCouldDo;
+  src: url(./fonts/NothingYouCouldDo-Regular.ttf);
+}
+
+.font-NothingYouCouldDo {
+  font-family: 'NothingYouCouldDo';
+}
+
 p {
   margin: 0 0 0px;
 }

@@ -1,45 +1,49 @@
 <template>
-  <q-layout class="gradient-background" view="hHh LpR fff" style="min-height: 100vh">
-    <q-header class="gradient-background" style="min-height:fit-content">
-      <q-toolbar class="flex-center q-pa-md" style="flex-wrap:wrap; gap:10px">
-        <q-btn
-          class="header-footer"
-          v-for="route in internalRoutes"
-          flat
-          unelevated
-          rounded
-          no-caps
-          :ripple="false"
-          :label="route.title"
-          :key="route.title"
-          :to="`/${route.link}`"
-        />
-        <q-btn
-          color="black"
-          flat
-          round
-          size="md"
-          icon="shopping_cart"
-          aria-label="Shopping Cart"
-          :to="'/shopping-cart'"
-        >
-          <q-badge
-            v-if="shoppingCart.length > 0"
-            color="red"
+  <q-layout class="bg-grey-4" view="hHh LpR fff" style="min-height: 100vh">
+    <q-header class="bg-grey-4" style="min-height:fit-content">
+      <q-toolbar class="items-center justify-evenly q-pa-md" style="flex-wrap:wrap; gap:10px">
+        <p class="text-h6 text-black font-NothingYouCouldDo">L.M. Service</p>
+        <div>
+          <q-btn
+            class="header-footer"
+            v-for="route in internalRoutes"
+            flat
+            unelevated
             rounded
-            floating
-            :label="shoppingCart.length"
+            no-caps
+            :ripple="false"
+            :label="route.title"
+            :key="route.title"
+            :to="`/${route.link}`"
           />
-        </q-btn>
-        <!-- <q-btn
-          class="q-ml-sm"
-          flat
-          dense
-          round
-          icon="account_circle"
-          aria-label="Account"
-          @click="toogleAccountDrawer"
-        /> -->
+          <q-btn
+            color="black"
+            flat
+            round
+            size="md"
+            icon="shopping_cart"
+            aria-label="Shopping Cart"
+            :to="'/shopping-cart'"
+          >
+            <q-badge
+              v-if="shoppingCart.length > 0"
+              color="red"
+              rounded
+              floating
+              :label="shoppingCart.length"
+            />
+          </q-btn>
+        
+          <!-- <q-btn
+            class="q-ml-sm"
+            flat
+            dense
+            round
+            icon="account_circle"
+            aria-label="Account"
+            @click="toogleAccountDrawer"
+          /> -->
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -131,7 +135,7 @@
     </q-drawer> -->
 
     <q-page-container class="flex justify-center relative">
-      <router-view class="q-pa-xl" style="max-width: 1280px; width: 90%"/>
+      <router-view class="q-pa-xl" style="max-width: 1680px; width: 90%"/>
         <q-btn
           class="favorite-btn"
           v-if="getFavoritesNumber() > 0"

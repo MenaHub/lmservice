@@ -9,6 +9,7 @@
       infinite
       autoplay
       v-model="project.carouselIndex"
+      height="600px"
     >
       <q-carousel-slide
         v-for="(photo, j) in project.photos"

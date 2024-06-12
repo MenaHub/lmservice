@@ -17,6 +17,7 @@
         animated
         infinite
         v-model="carouselIndexes[i].currentIndex"
+        height="600px"
       >
         <q-carousel-slide
           v-for="(photo, j) in project.photos"

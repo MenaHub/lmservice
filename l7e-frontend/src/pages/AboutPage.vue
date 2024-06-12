@@ -1,7 +1,8 @@
 <template>
   <q-page>
-    <div class="q-mb-lg">
-      <p class="text-h3">Welcome to L.M. Service</p>
+    <div class="row q-mb-lg items-center q-gutter-xl">
+      <div class="col-auto text-h5 text-weight-light">Welcome to </div>
+      <p class="col-auto text-h3 font-NothingYouCouldDo" style="max-width:fit-content"> L.M. Service</p>
     </div>
     <div class="row" style="column-gap: 4rem">
       <div :class="$q.screen.gt.sm ? 'col-6' : 'col-12'">
